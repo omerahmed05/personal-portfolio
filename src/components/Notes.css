@@ -1,0 +1,166 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #eaeaea;
+}
+
+.notes-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem 20px; /* Added horizontal padding for consistent spacing */
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter-section button {
+  margin: 5px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-section button.selected {
+  background: #0056b3;
+}
+
+.filter-section button:hover {
+  background: #0056b3;
+}
+
+.notes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.note-card {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 10px;
+  width: 200px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.note-card:hover {
+  background: #e9ecef;
+}
+
+.note-title {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.note-details {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.note-actions {
+  margin-top: 10px;
+}
+
+.edit-button, .delete-button, .close-button {
+  margin-right: 10px;
+}
+
+.auth-section, .editor-section, .add-note, .add-category {
+  text-align: center;
+}
+
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align editor and other elements */
+  gap: 20px;
+}
+
+.editor-wrapper {
+  width: 100%; /* Full width within its container */
+  max-width: 800px; /* Adjust to your desired max width */
+  margin: 0 auto; /* Center the editor wrapper */
+}
+
+.editorClassName {
+  min-height: 150px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%; /* Full width within its container */
+}
+
+.ql-container {
+  width: 100%; /* Full width within its container */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.ql-editor {
+  min-height: 150px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.ql-toolbar {
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 4px 4px 0 0;
+}
+
+.add-note, .add-category {
+  margin-bottom: 20px;
+}
+
+input[type="text"], input[type="password"], select {
+  width: calc(100% - 40px); /* Adjust width to account for padding and margin */
+  padding: 10px;
+  margin: 5px 0 5px 0; /* Maintain consistent margin */
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+button:disabled {
+  background: #6c757d;
+}
+
+.center-button {
+  display: block;
+  margin: 10px auto; /* Center the button horizontally */
+}
