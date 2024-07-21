@@ -4,7 +4,6 @@ import '../styles.css';
 
 const Contact = () => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
 
@@ -13,6 +12,8 @@ const Contact = () => {
     const form = e.target;
     const formData = new FormData(form);
 
+    formData.append('email', 'omera@vt.edu'); 
+    
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -50,17 +51,10 @@ const Contact = () => {
           onChange={(e) => setName(e.target.value)}
         />
         <TextField
-          label="Email"
-          variant="outlined"
-          fullWidth
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
           label="Message"
           variant="outlined"
           fullWidth
+          name="message"
           multiline
           rows={4}
           value={message}
