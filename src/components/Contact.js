@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Container, Typography, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import '../styles.css';
 
 const Contact = () => {
@@ -7,14 +8,15 @@ const Contact = () => {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
   const [openPopup, setOpenPopup] = useState(false);
+  const [hcaptchaToken, setHcaptchaToken] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    
-    formData.append('message', message);
-    formData.append('name', name);
+
+    // Append the hCaptcha token to the form data
+    formData.append('h-captcha-response', hcaptchaToken);
 
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
@@ -25,6 +27,7 @@ const Contact = () => {
         if (result.success) {
           setName('');
           setMessage('');
+          setHcaptchaToken(''); 
           setOpenPopup(true); 
         } else {
           setStatus('Failed to send message. Please try again.');
@@ -69,11 +72,15 @@ const Contact = () => {
           label="Message"
           variant="outlined"
           fullWidth
-          name="message"  
+          name="message"
           multiline
           rows={4}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+        />
+        <HCaptcha
+          sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+          onVerify={(token) => setHcaptchaToken(token)}
         />
         <Button type="submit" variant="contained" color="primary" className="submit-button">Send</Button>
         {status && <Typography variant="body1" color="textSecondary">{status}</Typography>}
