@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Notes.css';
@@ -15,6 +15,10 @@ const Notes = () => {
   const [selectedNote, setSelectedNote] = useState(null);
   const [editIndex, setEditIndex] = useState(null);
 
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
   const handleAuthentication = () => {
@@ -25,22 +29,38 @@ const Notes = () => {
     }
   };
 
-  const handleAddNote = () => {
+  const fetchNotes = async () => {
+    try {
+      const response = await fetch('/.netlify/functions/getNotes');
+      const data = await response.json();
+      setNotes(data);
+    } catch (error) {
+      alert('Failed to fetch notes');
+    }
+  };
+
+  const handleAddNote = async () => {
     if (!selectedCategory) {
       alert('Please select a category');
       return;
     }
     if (isAuthenticated) {
-      if (editIndex !== null) {
-        const updatedNotes = notes.map((note, index) =>
-          index === editIndex ? { title: noteTitle, text: editorContent, category: selectedCategory } : note
-        );
-        setNotes(updatedNotes);
-        setEditIndex(null);
-      } else {
-        setNotes([...notes, { title: noteTitle, text: editorContent, category: selectedCategory }]);
+      const note = {
+        title: noteTitle,
+        text: editorContent,
+        category: selectedCategory,
+      };
+      try {
+        const response = await fetch('/.netlify/functions/saveNote', {
+          method: 'POST',
+          body: JSON.stringify(note),
+        });
+        const data = await response.json();
+        setNotes([...notes, { ...note, id: data.id }]);
+        resetNoteFields();
+      } catch (error) {
+        alert('Failed to save note');
       }
-      resetNoteFields();
     } else {
       alert('You need to authenticate first');
     }
@@ -55,12 +75,18 @@ const Notes = () => {
     setEditIndex(index);
   };
 
-  const handleDeleteNote = (index) => {
+  const handleDeleteNote = async (index) => {
     if (isAuthenticated) {
-      const newNotes = notes.filter((_, i) => i !== index);
-      setNotes(newNotes);
-      setSelectedNote(null);
-      resetNoteFields();
+      const noteId = notes[index].id;
+      try {
+        await fetch(`/.netlify/functions/deleteNote?id=${noteId}`, { method: 'DELETE' });
+        const newNotes = notes.filter((_, i) => i !== index);
+        setNotes(newNotes);
+        setSelectedNote(null);
+        resetNoteFields();
+      } catch (error) {
+        alert('Failed to delete note');
+      }
     } else {
       alert('You need to authenticate first');
     }
@@ -167,10 +193,10 @@ const Notes = () => {
                 onChange={setEditorContent}
                 modules={{
                   toolbar: [
-                    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-                    [{size: []}],
+                    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                    [{ size: [] }],
                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
                     ['link', 'image'],
                     ['clean']
                   ],
