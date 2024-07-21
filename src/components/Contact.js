@@ -1,26 +1,40 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button, Container, Typography, Card, CardContent } from '@mui/material';
+import { Box, TextField, Button, Container, Typography, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import '../styles.css';
 
 const Contact = () => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
+  const [openPopup, setOpenPopup] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-
-    formData.append('email', 'omera@vt.edu'); 
     
-    fetch('/', {
+    formData.append('message', message);
+    formData.append('name', name);
+
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formData).toString(),
+      body: formData,
     })
-      .then(() => setStatus('Message sent successfully!'))
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          setName('');
+          setMessage('');
+          setOpenPopup(true); 
+        } else {
+          setStatus('Failed to send message. Please try again.');
+        }
+      })
       .catch((error) => setStatus('Failed to send message. Please try again.'));
+  };
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
   };
 
   return (
@@ -37,11 +51,12 @@ const Contact = () => {
       <form 
         name="contact" 
         method="POST" 
-        data-netlify="true" 
         onSubmit={handleSubmit} 
         className="contact-form"
       >
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="access_key" value="0ef72a93-e8ea-473f-bafb-7c396b379992" />
+        <input type="hidden" name="subject" value="New Contact Form Submission" />
+
         <TextField
           label="Name"
           variant="outlined"
@@ -54,7 +69,7 @@ const Contact = () => {
           label="Message"
           variant="outlined"
           fullWidth
-          name="message"
+          name="message"  
           multiline
           rows={4}
           value={message}
@@ -63,6 +78,24 @@ const Contact = () => {
         <Button type="submit" variant="contained" color="primary" className="submit-button">Send</Button>
         {status && <Typography variant="body1" color="textSecondary">{status}</Typography>}
       </form>
+
+      <Dialog
+        open={openPopup}
+        onClose={handleClosePopup}
+        aria-labelledby="thank-you-dialog"
+      >
+        <DialogTitle id="thank-you-dialog">Thank You!</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Your message has been sent successfully. Thank you for reaching out!
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosePopup} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
