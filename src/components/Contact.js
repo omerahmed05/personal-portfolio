@@ -15,7 +15,6 @@ const Contact = () => {
     const form = e.target;
     const formData = new FormData(form);
 
-    // Append the hCaptcha token to the form data
     formData.append('h-captcha-response', hcaptchaToken);
 
     fetch('https://api.web3forms.com/submit', {
@@ -78,11 +77,17 @@ const Contact = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <HCaptcha
-          sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-          onVerify={(token) => setHcaptchaToken(token)}
-        />
-        <Button type="submit" variant="contained" color="primary" className="submit-button">Send</Button>
+
+        <Box display="flex" flexDirection="column" alignItems="center" mt={2}>
+          <HCaptcha
+            sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+            onVerify={(token) => setHcaptchaToken(token)}
+          />
+          <Button type="submit" variant="contained" color="primary" className="submit-button" sx={{ mt: 2 }}>
+            Send
+          </Button>
+        </Box>
+
         {status && <Typography variant="body1" color="textSecondary">{status}</Typography>}
       </form>
 
