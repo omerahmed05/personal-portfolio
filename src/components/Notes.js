@@ -18,29 +18,43 @@ const Notes = () => {
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
   const handleAuthentication = () => {
-    if (password === 'yourpassword') {
+    if (password === 'yourpassword') {  // Replace 'yourpassword' with your actual password
       setIsAuthenticated(true);
     } else {
       alert('Incorrect password');
     }
   };
 
-  const handleAddNote = () => {
+  const handleAddNote = async () => {
     if (!selectedCategory) {
       alert('Please select a category');
       return;
     }
     if (isAuthenticated) {
-      if (editIndex !== null) {
-        const updatedNotes = notes.map((note, index) =>
-          index === editIndex ? { title: noteTitle, text: editorContent, category: selectedCategory } : note
-        );
-        setNotes(updatedNotes);
-        setEditIndex(null);
-      } else {
-        setNotes([...notes, { title: noteTitle, text: editorContent, category: selectedCategory }]);
+      const note = {
+        title: noteTitle,
+        content: editorContent,
+        category: selectedCategory
+      };
+
+      try {
+        const response = await fetch('/.netlify/functions/saveNote', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(note),
+        });
+        const result = await response.json();
+        if (response.ok) {
+          setNotes([...notes, { ...note, id: result.id }]);
+          resetNoteFields();
+        } else {
+          alert('Failed to save note: ' + result.message);
+        }
+      } catch (error) {
+        alert('Error saving note: ' + error.message);
       }
-      resetNoteFields();
     } else {
       alert('You need to authenticate first');
     }
@@ -167,10 +181,10 @@ const Notes = () => {
                 onChange={setEditorContent}
                 modules={{
                   toolbar: [
-                    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-                    [{size: []}],
+                    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                    [{ size: [] }],
                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
                     ['link', 'image'],
                     ['clean']
                   ],
