@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
+import { Route, Routes, Link, useLocation } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Typography, Container, Drawer, IconButton, List, ListItem, ListItemText, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import About from './components/About';
@@ -9,7 +9,7 @@ import Experience from './components/Experience';
 import Notes from './components/Notes'; // Import Notes component
 import './styles.css';
 
-function App() {
+const App = () => {
   const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -97,10 +97,6 @@ function App() {
       </main>
     </div>
   );
-}
+};
 
-export default () => (
-  <Router>
-    <App />
-  </Router>
-);
+export default App;
