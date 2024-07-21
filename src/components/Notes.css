@@ -6,7 +6,7 @@ body {
 .notes-container {
   max-width: 1000px;
   margin: 2rem auto;
-  padding: 1rem 20px; /* Added horizontal padding for consistent spacing */
+  padding: 1rem 20px; 
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -95,14 +95,14 @@ h1 {
 .editor-section {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center-align editor and other elements */
+  align-items: center; 
   gap: 20px;
 }
 
 .editor-wrapper {
-  width: 100%; /* Full width within its container */
-  max-width: 800px; /* Adjust to your desired max width */
-  margin: 0 auto; /* Center the editor wrapper */
+  width: 100%; 
+  max-width: 800px; 
+  margin: 0 auto; 
 }
 
 .editorClassName {
@@ -110,12 +110,12 @@ h1 {
   border: 1px solid #dee2e6;
   border-radius: 4px;
   padding: 10px;
-  width: 100%; /* Full width within its container */
+  width: 100%; 
 }
 
 .ql-container {
-  width: 100%; /* Full width within its container */
-  box-sizing: border-box; /* Include padding in the width */
+  width: 100%; 
+  box-sizing: border-box;
 }
 
 .ql-editor {
@@ -134,12 +134,12 @@ h1 {
 }
 
 input[type="text"], input[type="password"], select {
-  width: calc(100% - 40px); /* Adjust width to account for padding and margin */
+  width: calc(100% - 40px);
   padding: 10px;
-  margin: 5px 0 5px 0; /* Maintain consistent margin */
+  margin: 5px 0 5px 0; 
   border: 1px solid #dee2e6;
   border-radius: 4px;
-  box-sizing: border-box; /* Ensure padding is included in the width */
+  box-sizing: border-box; 
 }
 
 button {
@@ -162,5 +162,5 @@ button:disabled {
 
 .center-button {
   display: block;
-  margin: 10px auto; /* Center the button horizontally */
+  margin: 10px auto; 
 }

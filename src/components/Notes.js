@@ -92,7 +92,6 @@ const Notes = () => {
     <div className="notes-container">
       <h1>Notes</h1>
 
-      {/* Category filter */}
       <div className="filter-section">
         <button
           onClick={() => handleCategoryFilter('')}
@@ -111,7 +110,6 @@ const Notes = () => {
         ))}
       </div>
 
-      {/* Display notes */}
       <div className="notes-list">
         {filteredNotes.length === 0 ? (
           <p style={{ textAlign: 'center', fontSize: '16px', color: '#666' }}>No notes available</p>
@@ -128,7 +126,6 @@ const Notes = () => {
         )}
       </div>
 
-      {/* Show full note when selected */}
       {selectedNote && (
         <div className="note-details">
           <h2>{selectedNote.title}</h2>
@@ -143,7 +140,6 @@ const Notes = () => {
         </div>
       )}
 
-      {/* Authentication for editing and deleting */}
       <div className="auth-section">
         {!isAuthenticated ? (
           <>

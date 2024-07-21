@@ -1,14 +1,14 @@
 import React from 'react';
 import { Box, Card, CardContent, Typography, Container, Link as MuiLink } from '@mui/material';
 import './Projects.css';
-import codeWorldLogo from '../assets/codeWorldLogo.png';  // Ensure the path is correct
-import vtHaxLogo from '../assets/vtHaxLogo.png';  // Ensure the path is correct
+import codeWorldLogo from '../assets/codeWorldLogo.png';  
+import vtHaxLogo from '../assets/vtHaxLogo.png'; 
 
 const projects = [
   {
     title: 'AutoPrint: Automatic Print Statement Insertion Tool',
     logo: codeWorldLogo,
-    logoLink: 'https://codeworld.example.com',  // Replace with the actual URL
+    logoLink: 'https://code-world-no-blanket.github.io/',  
     description: (
       <>
         <Typography variant="body2" paragraph>
@@ -31,14 +31,14 @@ const projects = [
       </>
     ),
     links: [
-      { label: 'View Paper', href: 'link-to-your-PDF' },
-      { label: 'GitHub', href: 'link-to-your-GitHub' }
+      { label: 'View Paper', href: 'https://drive.google.com/file/d/1Y5YX_jI149vjMSPKd0X6e_wP9vH7lWfu/view?usp=sharing' },
+      { label: 'GitHub', href: 'https://github.com/minhyukko/AutoPrint' }
     ]
   },
   {
     title: 'ATS Resume Checker Bot',
     logo: vtHaxLogo,
-    logoLink: 'https://vthax.example.com',  // Replace with the actual URL
+    logoLink: 'https://vthacks.com/',  
     description: (
       <>
         <Typography variant="body2" paragraph>
@@ -68,7 +68,7 @@ const projects = [
       </>
     ),
     links: [
-      { label: 'GitHub', href: 'link-to-your-GitHub' }
+      { label: 'GitHub', href: 'https://github.com/Nexoogha/ResumeChecker' }
     ]
   }
 ];

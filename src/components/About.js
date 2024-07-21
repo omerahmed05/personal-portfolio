@@ -14,11 +14,11 @@ const About = () => {
             <Typography variant="subtitle1">Computer Science Student @ Virginia Tech | Software Engineer Intern @ Xylem Inc.</Typography>
             <Typography variant="body2" className="location">📍 Chantilly, VA</Typography>
             <Box className="nav-links">
-              <MuiLink href="link-to-your-X" target="_blank" rel="noopener" mr={1}>X</MuiLink>
-              <MuiLink href="link-to-your-LinkedIn" target="_blank" rel="noopener" mr={1}>LinkedIn</MuiLink>
-              <MuiLink href="link-to-your-GitHub" target="_blank" rel="noopener" mr={1}>GitHub</MuiLink>
-              <MuiLink href="link-to-your-Resume" target="_blank" rel="noopener" mr={1}>Resume</MuiLink>
-              <MuiLink href="link-to-your-Kaggle" target="_blank" rel="noopener" mr={1}>Kaggle</MuiLink>
+              <MuiLink href="https://x.com/OmerAhmedib" target="_blank" rel="noopener" mr={1}>X</MuiLink>
+              <MuiLink href="https://linkedin.com/in/omah" target="_blank" rel="noopener" mr={1}>LinkedIn</MuiLink>
+              <MuiLink href="https://github.com/omerahmed05" target="_blank" rel="noopener" mr={1}>GitHub</MuiLink>
+              <MuiLink href="https://drive.google.com/file/d/1UmnDhiJoFZTGN9QSjpUhSzq81uiYfVPG/view?usp=sharing" target="_blank" rel="noopener" mr={1}>Resume</MuiLink>
+              <MuiLink href="https://www.kaggle.com/remodemha" target="_blank" rel="noopener" mr={1}>Kaggle</MuiLink>
             </Box>
           </Box>
         </Box>

@@ -25,7 +25,7 @@
 }
 
 .same-size-textbox {
-  width: 100%; /* Ensures both text fields take the full width of their container */
+  width: 100%; 
 }
 
 .submit-button {
@@ -38,15 +38,12 @@
   background-color: #0056b3;
 }
 
-/* Additional styles from styles.css */
-
 body {
   font-family: 'Roboto', sans-serif;
   background: #eaeaea;
   margin: 0;
 }
 
-/* AppBar and general layout styles */
 .MuiAppBar-root {
   position: fixed;
   top: 0;
@@ -56,10 +53,9 @@ body {
 
 main {
   display: block;
-  transition: margin-left 0.3s ease-in-out; /* Smooth transition for margin adjustment */
+  transition: margin-left 0.3s ease-in-out; 
 }
 
-/* Notes page specific styles */
 .notes-textarea {
   width: 100%;
   height: 100px;
@@ -74,7 +70,6 @@ main {
   margin: 5px;
 }
 
-/* Existing styles for other sections */
 .experience {
   padding: 20px;
 }
@@ -89,12 +84,12 @@ main {
 }
 
 .timeline-text {
-  margin-bottom: 1rem; /* Adjust margin as needed */
+  margin-bottom: 1rem; 
 }
 
 .show-more-button {
   display: block;
-  margin-top: 1rem; /* Space between text and button */
+  margin-top: 1rem; 
   background-color: #3e497a;
   color: #fff;
   border: none;
@@ -109,7 +104,6 @@ main {
   background-color: #2c3e50;
 }
 
-/* Media queries for responsive design */
 @media (max-width: 600px) {
   .MuiAppBar-root {
     display: flex;
@@ -123,7 +117,7 @@ main {
   }
 
   .MuiAppBar-root .MuiButton-root {
-    display: none; /* Hide nav buttons on mobile */
+    display: none; 
   }
 
   .MuiDrawer-root {
@@ -131,7 +125,7 @@ main {
   }
 
   .MuiDrawer-paper {
-    width: 250px; /* Adjust width as needed */
+    width: 250px; 
     position: fixed;
     top: 0;
     left: 0;
@@ -140,7 +134,7 @@ main {
   }
 
   .MuiDrawer-root .MuiDrawer-paper {
-    transform: translateX(-250px); /* Start hidden off-screen */
+    transform: translateX(-250px); 
   }
 
   .MuiDrawer-root.MuiDrawer-docked .MuiDrawer-paper {

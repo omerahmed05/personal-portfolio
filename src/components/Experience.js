@@ -7,14 +7,12 @@ import reachlogo from "../assets/reach-lab-logo.png";
 import xylemlogo from "../assets/xylem-logo.png";
 
 function Experience() {
-  // Initialize showMore state to keep all sections collapsed by default
   const [showMore, setShowMore] = useState({
     cwnb: false,
     reach: false,
     xylem: false,
   });
 
-  // Toggle function to update state based on the key provided
   const handleToggle = (key) => {
     setShowMore((prevState) => ({ ...prevState, [key]: !prevState[key] }));
   };

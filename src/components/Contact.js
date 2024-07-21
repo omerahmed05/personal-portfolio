@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Container, Typography, Card, CardContent } from '@mui/material';
-import emailjs from 'emailjs-com';
 import '../styles.css';
 
 const Contact = () => {
@@ -11,21 +10,16 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
 
-    const templateParams = {
-      name,
-      email,
-      message,
-    };
-
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_USER_ID')
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        setStatus('Message sent successfully!');
-      }, (error) => {
-        console.log('FAILED...', error);
-        setStatus('Failed to send message. Please try again.');
-      });
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then(() => setStatus('Message sent successfully!'))
+      .catch((error) => setStatus('Failed to send message. Please try again.'));
   };
 
   return (
@@ -39,7 +33,14 @@ const Contact = () => {
           </CardContent>
         </Card>
       </Box>
-      <form onSubmit={handleSubmit} className="contact-form">
+      <form 
+        name="contact" 
+        method="POST" 
+        data-netlify="true" 
+        onSubmit={handleSubmit} 
+        className="contact-form"
+      >
+        <input type="hidden" name="form-name" value="contact" />
         <TextField
           label="Name"
           variant="outlined"
