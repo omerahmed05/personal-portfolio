@@ -13,7 +13,6 @@ const Notes = () => {
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
-  const [editIndex, setEditIndex] = useState(null);
 
   useEffect(() => {
     fetchNotes();
