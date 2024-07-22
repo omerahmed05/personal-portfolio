@@ -244,12 +244,14 @@ const Notes = () => {
                 <option key={index} value={cat}>{cat}</option>
               ))}
             </select>
-            <button onClick={handleAddNote} className="add-note-button">
-              {selectedNote ? 'Update Note' : 'Add Note'}
-            </button>
-            {selectedNote && (
-              <button onClick={resetNoteFields} className="cancel-button">Cancel</button>
-            )}
+            <div className="button-container">
+              <button onClick={handleAddNote} className="add-note-button">
+                {selectedNote ? 'Update Note' : 'Add Note'}
+              </button>
+              {selectedNote && (
+                <button onClick={resetNoteFields} className="cancel-button">Cancel</button>
+              )}
+            </div>
           </div>
 
           <div className="category-form">
@@ -261,7 +263,9 @@ const Notes = () => {
               onChange={(e) => setCategoryName(e.target.value)}
               className="category-input"
             />
-            <button onClick={handleAddCategory} className="add-category-button">Add Category</button>
+            <div className="button-container">
+              <button onClick={handleAddCategory} className="add-category-button">Add Category</button>
+            </div>
           </div>
         </>
       )}

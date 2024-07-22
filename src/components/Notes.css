@@ -132,6 +132,13 @@ h1 {
 .note-editor .ql-container {
   height: 200px;
   padding: 0.5rem;
+  background: white; /* Set the background color to white */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* Add gap between buttons */
 }
 
 .add-note-button,
