@@ -77,15 +77,14 @@ const Notes = () => {
     setSelectedNote(note);
   };
 
-  const handleDeleteNote = async (index) => {
+  const handleDeleteNote = async (noteId) => {
     if (isAuthenticated) {
-      const noteId = notes[index].id;
       try {
         const response = await fetch(`/.netlify/functions/deleteNote?id=${noteId}`, { method: 'DELETE' });
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const newNotes = notes.filter((_, i) => i !== index);
+        const newNotes = notes.filter(note => note.id !== noteId);
         setNotes(newNotes);
         setSelectedNote(null);
         resetNoteFields();
@@ -94,6 +93,13 @@ const Notes = () => {
       }
     } else {
       alert('You need to authenticate first');
+    }
+  };
+
+  const handleUpdateNote = async () => {
+    if (isAuthenticated && selectedNote) {
+      await handleDeleteNote(selectedNote.id);
+      handleAddNote();
     }
   };
 
@@ -130,7 +136,7 @@ const Notes = () => {
           {isAuthenticated && (
             <div className="note-actions">
               <button className="edit-button" onClick={() => handleEditNote(notes.findIndex(n => n.id === selectedNote.id))}>Edit</button>
-              <button className="delete-button" onClick={() => handleDeleteNote(notes.findIndex(n => n.id === selectedNote.id))}>Delete</button>
+              <button className="delete-button" onClick={() => handleDeleteNote(selectedNote.id)}>Delete</button>
             </div>
           )}
         </div>
@@ -149,7 +155,7 @@ const Notes = () => {
             onChange={setEditorContent}
             theme="snow"
           />
-          <button className="submit-button" onClick={handleAddNote}>
+          <button className="submit-button" onClick={selectedNote ? handleUpdateNote : handleAddNote}>
             {selectedNote ? 'Update Note' : 'Add Note'}
           </button>
           {selectedNote && (
