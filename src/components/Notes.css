@@ -1,180 +1,187 @@
-body {
-  font-family: 'Roboto', sans-serif;
-  background: #eaeaea;
-}
-
+/* General Container Styles */
 .notes-container {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  font-family: Arial, sans-serif;
 }
 
-h1 {
-  font-size: 2.5rem;
-  color: #333;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
+/* Filter Section */
 .filter-section {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
 .filter-section button {
-  margin: 0 0.5rem;
-  padding: 0.5rem 1rem;
-  background: #007bff;
-  color: white;
-  border: none;
+  margin: 5px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
   border-radius: 4px;
+  background-color: #f8f8f8;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
 }
 
 .filter-section button:hover {
-  background: #0056b3;
+  background-color: #e0e0e0;
 }
 
-.filter-section .selected {
-  background: #0056b3;
+.selected {
+  font-weight: bold;
+  color: #007bff;
 }
 
+/* Notes List */
 .notes-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  margin: 20px 0;
 }
 
 .note-card {
-  padding: 1rem;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: transform 0.3s;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  transition: box-shadow 0.3s;
 }
 
 .note-card:hover {
-  transform: scale(1.02);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .note-title {
-  font-size: 1.25rem;
-  color: #333;
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
 }
 
+/* Note Details */
 .note-details {
-  margin-top: 2rem;
-  padding: 1rem;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+  background-color: #f9f9f9;
 }
 
 .note-details h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-top: 0;
 }
 
 .note-actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+  margin-top: 10px;
 }
 
-.note-actions button {
-  margin-right: 1rem;
-  padding: 0.5rem 1rem;
-  background: #d9534f;
-  color: white;
+.edit-button, .delete-button {
+  margin: 5px;
+  padding: 8px 12px;
   border: none;
   border-radius: 4px;
+  color: #fff;
   cursor: pointer;
 }
 
-.note-actions button:hover {
-  background: #c9302c;
+.edit-button {
+  background-color: #007bff;
 }
 
-.note-form,
-.category-form,
-.auth-section {
-  margin-top: 2rem;
-  padding: 1rem;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.delete-button {
+  background-color: #dc3545;
 }
 
-.note-form h3,
-.category-form h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+/* Form Styles */
+.note-form, .category-form {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
 }
 
-.note-input,
-.note-editor,
-.note-select,
-.category-input,
-.auth-input {
+.note-form input[type="text"], .category-form input[type="text"], .note-form select {
   width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.note-editor .ql-container {
-  height: 200px;
-  padding: 0.5rem;
-  background: white; /* Set the background color to white */
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem; /* Add gap between buttons */
-}
-
-.add-note-button,
-.cancel-button,
-.add-category-button,
-.auth-button {
-  padding: 0.5rem 1rem;
-  background: #007bff;
-  color: white;
+.note-form button, .category-form button {
+  margin: 10px 5px 0;
+  padding: 10px 15px;
   border: none;
   border-radius: 4px;
+  color: #fff;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
 }
 
-.add-note-button:hover,
-.cancel-button:hover,
-.add-category-button:hover,
+.note-form .submit-button {
+  background-color: #28a745;
+}
+
+.category-form .submit-button {
+  background-color: #007bff;
+}
+
+.note-form .submit-button:hover, .category-form .submit-button:hover {
+  background-color: #218838;
+}
+
+/* Authentication Section */
+.authentication-section {
+  margin-top: 20px;
+}
+
+.authentication-section h2 {
+  margin-top: 0;
+}
+
+.authentication-section input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.auth-button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
 .auth-button:hover {
-  background: #0056b3;
+  background-color: #0056b3;
 }
 
-.cancel-button {
-  background: #6c757d;
-}
-
-.cancel-button:hover {
-  background: #5a6268;
-}
-
-.auth-section {
+/* Category Management */
+.category-item {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.category-actions {
+  display: flex;
   align-items: center;
 }
 
-.auth-section input {
-  margin-bottom: 1rem;
+.category-actions .edit-button, .category-actions .delete-button {
+  margin-left: 5px;
+  padding: 5px 10px;
+}
+
+.category-actions .edit-button {
+  background-color: #007bff;
+}
+
+.category-actions .delete-button {
+  background-color: #dc3545;
 }

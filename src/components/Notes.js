@@ -284,77 +284,77 @@ const Notes = () => {
                 setNoteTitle(selectedNote.title);
                 setEditorContent(selectedNote.text);
                 setSelectedCategory(selectedNote.category);
-              }}>Edit</button>
-              <button onClick={() => handleDeleteNote(notes.findIndex(n => n.id === selectedNote.id))}>Delete</button>
+              }} className="edit-button">Edit</button>
+              <button onClick={() => handleDeleteNote(notes.indexOf(selectedNote))} className="delete-button">Delete</button>
             </div>
           )}
         </div>
       )}
 
-      {isAuthenticated ? (
-        <div className="add-edit-section">
-          <input
-            type="text"
-            value={noteTitle}
-            onChange={(e) => setNoteTitle(e.target.value)}
-            placeholder="Note Title"
-          />
-          <ReactQuill
-            value={editorContent}
-            onChange={setEditorContent}
-            placeholder="Write your note here..."
-          />
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="">Select a Category</option>
-            {categories.map((cat, index) => (
-              <option key={index} value={cat.name}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
-          <button onClick={selectedNote ? handleEditNote : handleAddNote}>
-            {selectedNote ? 'Update Note' : 'Add Note'}
-          </button>
-        </div>
-      ) : (
-        <div className="auth-section">
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Enter password"
-          />
-          <button onClick={handleAuthentication}>Authenticate</button>
-        </div>
-      )}
+      <div className="note-form">
+        <input
+          type="text"
+          placeholder="Title"
+          value={noteTitle}
+          onChange={(e) => setNoteTitle(e.target.value)}
+        />
+        <ReactQuill
+          value={editorContent}
+          onChange={setEditorContent}
+          theme="snow"
+        />
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="">Select Category</option>
+          {categories.map((cat, index) => (
+            <option key={index} value={cat.name}>{cat.name}</option>
+          ))}
+        </select>
+        {selectedNote ? (
+          <button onClick={handleEditNote} className="submit-button">Update Note</button>
+        ) : (
+          <button onClick={handleAddNote} className="submit-button">Add Note</button>
+        )}
+      </div>
 
-      {isAuthenticated && (
-        <div className="category-section">
-          <input
-            type="text"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
-            placeholder="Category Name"
-          />
-          <button onClick={categoryToEdit ? handleEditCategory : handleAddCategory}>
-            {categoryToEdit ? 'Update Category' : 'Add Category'}
-          </button>
-          {categories.length > 0 && (
-            <div className="category-list">
-              {categories.map((cat, index) => (
-                <div key={index} className="category-item">
-                  <span>{cat.name}</span>
-                  <button onClick={() => setCategoryToEdit(cat)}>Edit</button>
-                  <button onClick={() => handleDeleteCategory(index)}>Delete</button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+      <div className="category-form">
+        <h2>Manage Categories</h2>
+        <input
+          type="text"
+          placeholder="Category Name"
+          value={categoryName}
+          onChange={(e) => setCategoryName(e.target.value)}
+        />
+        {categoryToEdit ? (
+          <button onClick={handleEditCategory} className="submit-button">Update Category</button>
+        ) : (
+          <button onClick={handleAddCategory} className="submit-button">Add Category</button>
+        )}
+        {categories.map((cat, index) => (
+          <div key={index} className="category-item">
+            <span>{cat.name}</span>
+            {isAuthenticated && (
+              <div className="category-actions">
+                <button onClick={() => setCategoryToEdit(cat)} className="edit-button">Edit</button>
+                <button onClick={() => handleDeleteCategory(index)} className="delete-button">Delete</button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="authentication-section">
+        <h2>Authenticate</h2>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+        <button onClick={handleAuthentication} className="auth-button">Authenticate</button>
+      </div>
     </div>
   );
 };
