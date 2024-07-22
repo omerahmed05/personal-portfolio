@@ -98,35 +98,18 @@ const Notes = () => {
 
   const handleUpdateNote = async () => {
     if (isAuthenticated && selectedNote) {
-      const updatedNote = {
-        title: noteTitle,
-        text: editorContent,
-      };
-      try {
-        const response = await fetch(`/.netlify/functions/updateNote?id=${selectedNote.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(updatedNote),
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setNotes(notes.map(note => (note.id === selectedNote.id ? { ...note, ...updatedNote } : note)));
-        resetNoteFields();
-      } catch (error) {
-        alert('Failed to update note');
-      }
-    } else {
-      alert('You need to authenticate first');
+      await handleDeleteNote(selectedNote.id);
+      handleAddNote();
     }
   };
 
   const resetNoteFields = () => {
     setNoteTitle('');
     setEditorContent('');
+    setSelectedNote(null);
+  };
+
+  const handleCloseNote = () => {
     setSelectedNote(null);
   };
 
@@ -158,6 +141,7 @@ const Notes = () => {
             <div className="note-actions">
               <button className="edit-button" onClick={() => handleEditNote(notes.findIndex(n => n.id === selectedNote.id))}>Edit</button>
               <button className="delete-button" onClick={() => handleDeleteNote(selectedNote.id)}>Delete</button>
+              <button className="close-button" onClick={handleCloseNote}>Close</button>
             </div>
           )}
         </div>
@@ -182,7 +166,7 @@ const Notes = () => {
             {selectedNote ? 'Update Note' : 'Add Note'}
           </button>
           {selectedNote && (
-            <button onClick={resetNoteFields}>Cancel</button>
+            <button className="cancel-button" onClick={resetNoteFields}>Cancel</button>
           )}
         </div>
       )}
