@@ -1,12 +1,12 @@
 .notes-container {
   padding: 20px;
   max-width: 800px;
-  margin: 20px auto; /* Adding gap at the top */
+  margin: 20px auto;
   font-family: Arial, sans-serif;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centering the text */
+  text-align: center;
 }
 
 .notes-container h1 {
@@ -19,7 +19,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center; /* Centering the note cards */
+  justify-content: center;
 }
 
 .note-card {
@@ -42,7 +42,7 @@
   font-size: 18px;
   margin: 0;
   font-weight: 600;
-  text-align: center; /* Centering the note titles */
+  text-align: center;
 }
 
 /* Note Details */
@@ -63,7 +63,8 @@
   margin-top: 10px;
 }
 
-.edit-button, .delete-button {
+.edit-button,
+.delete-button {
   margin: 5px;
   padding: 8px 12px;
   border: none;
@@ -92,16 +93,20 @@
 
 .note-title-input,
 .auth-input {
-  width: calc(100% - 20px); /* Adding margin to both sides */
+  width: calc(100% - 20px);
   padding: 10px;
   margin: 5px 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
+.rich-editor .ql-editor {
+  background-color: #fff;
+}
+
 .note-form button,
 .auth-section button {
-  margin: 10px auto; /* Centering the button */
+  margin: 10px auto;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
@@ -122,7 +127,7 @@
 /* Authentication Section */
 .auth-section {
   margin-top: 20px;
-  text-align: center; /* Centering the auth section */
+  text-align: center;
 }
 
 .auth-section h2 {
@@ -130,7 +135,7 @@
 }
 
 .auth-section input[type="password"] {
-  width: calc(100% - 20px); /* Adding margin to both sides */
+  width: calc(100% - 20px);
   padding: 10px;
   margin: 5px 10px;
   border: 1px solid #ddd;
