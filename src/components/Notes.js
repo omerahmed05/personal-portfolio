@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Notes.css';
+import dotenv from 'dotenv';
+
+const password = process.env.PASSWORD;
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
@@ -19,7 +22,7 @@ const Notes = () => {
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
   const handleAuthentication = () => {
-    if (password === 'yourpassword') {
+    if (password === password) {
       setIsAuthenticated(true);
     } else {
       alert('Incorrect password');
