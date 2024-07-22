@@ -1,27 +1,18 @@
-const bcrypt = require('bcrypt');
+const PASSWORD = process.env.PASSWORD_HASH;
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   const { password } = JSON.parse(event.body);
-  const storedHashedPassword = process.env.PASSWORD_HASH;
 
   try {
-    const match = await bcrypt.compare(password, storedHashedPassword);
-    if (match) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ isAuthenticated: true }),
-      };
-    } else {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ isAuthenticated: false }),
-      };
-    }
+    const isMatch = password === PASSWORD;
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ isAuthenticated: isMatch }),
+    };
   } catch (error) {
-    console.error('Error comparing passwords:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ isAuthenticated: false }),
+      body: JSON.stringify({ error: 'Failed to validate password' }),
     };
   }
 };
