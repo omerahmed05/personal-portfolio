@@ -10,6 +10,7 @@ const Notes = () => {
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     fetchNotes();
@@ -75,6 +76,7 @@ const Notes = () => {
     setNoteTitle(note.title);
     setEditorContent(note.text);
     setSelectedNote(note);
+    setIsEditing(true);
   };
 
   const handleDeleteNote = async (noteId) => {
@@ -100,6 +102,7 @@ const Notes = () => {
     if (isAuthenticated && selectedNote) {
       await handleDeleteNote(selectedNote.id);
       handleAddNote();
+      setIsEditing(false);
     }
   };
 
@@ -107,10 +110,12 @@ const Notes = () => {
     setNoteTitle('');
     setEditorContent('');
     setSelectedNote(null);
+    setIsEditing(false);
   };
 
   const handleCloseNote = () => {
     setSelectedNote(null);
+    setIsEditing(false);
   };
 
   return (
@@ -137,13 +142,15 @@ const Notes = () => {
         <div className="note-details">
           <h2>{selectedNote.title}</h2>
           <div dangerouslySetInnerHTML={{ __html: selectedNote.text }} />
-          {isAuthenticated && (
-            <div className="note-actions">
-              <button className="edit-button" onClick={() => handleEditNote(notes.findIndex(n => n.id === selectedNote.id))}>Edit</button>
-              <button className="delete-button" onClick={() => handleDeleteNote(selectedNote.id)}>Delete</button>
-              <button className="close-button" onClick={handleCloseNote}>Close</button>
-            </div>
-          )}
+          <div className="note-actions">
+            {isAuthenticated && (
+              <>
+                <button className="edit-button" onClick={() => handleEditNote(notes.findIndex(n => n.id === selectedNote.id))}>Edit</button>
+                <button className="delete-button" onClick={() => handleDeleteNote(selectedNote.id)}>Delete</button>
+              </>
+            )}
+            <button className="close-button" onClick={handleCloseNote}>Close</button>
+          </div>
         </div>
       )}
 
@@ -162,8 +169,8 @@ const Notes = () => {
             theme="snow"
             className="rich-editor"
           />
-          <button className="submit-button" onClick={selectedNote ? handleUpdateNote : handleAddNote}>
-            {selectedNote ? 'Update Note' : 'Add Note'}
+          <button className="submit-button" onClick={isEditing ? handleUpdateNote : handleAddNote}>
+            {isEditing ? 'Update Note' : 'Add Note'}
           </button>
           {selectedNote && (
             <button className="cancel-button" onClick={resetNoteFields}>Cancel</button>
