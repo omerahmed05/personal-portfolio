@@ -3,8 +3,47 @@ import { Box, Card, CardContent, Typography, Container, Link as MuiLink } from '
 import './Projects.css';
 import codeWorldLogo from '../assets/codeWorldLogo.png';  
 import vtHaxLogo from '../assets/vtHaxLogo.png'; 
-
+import personalPortfolioLogo from "../assets/personalPortfolioLogo.png";
 const projects = [
+  {
+    title: 'Personal Portfolio Website',
+    logo: personalPortfolioLogo,
+    logoLink: 'https://www.omerahmed.net', 
+    description: (
+      <>
+        <Typography variant="body2" paragraph>
+          Designed and developed as a showcase of skills and experiences, my personal portfolio website serves as a comprehensive platform highlighting my journey as a computer science student and software engineer intern. 
+        </Typography>
+        <Typography variant="body2" paragraph>
+          The frontend of the portfolio is crafted using React. It employs Material-UI components for a polished and responsive design, ensuring optimal performance across devices and screen sizes. The use of React Router enables smooth navigation between different sections such as About, Projects, Experience, Contact, and Notes.
+        </Typography>
+        <Typography variant="body2" paragraph>
+          Managing data for the Notes section is handled through Google Firebase Firestore, a flexible, scalable database for mobile, web, and server development from Firebase. This choice ensures secure storage and efficient retrieval of notes data, supporting CRUD (Create, Read, Update, Delete) operations seamlessly.
+        </Typography>
+        <Typography variant="body2" paragraph>
+          Backend functionalities are powered by Netlify Functions, serverless functions that provide a straightforward way to build backend services for web applications without managing servers. These functions handle operations such as saving, fetching, updating, and deleting notes data securely.
+        </Typography>
+        <Typography variant="body2" paragraph>
+          Authentication for sensitive actions, like editing and deleting notes, is implemented using a password-based mechanism, ensuring that only authorized users can perform these operations.
+        </Typography>
+        <Typography variant="body2" paragraph>
+          The Contact section integrates with Web3Forms API for handling form submissions securely. It includes validation using hCaptcha, a reliable bot protection service, ensuring that messages are submitted by human users only.
+        </Typography>
+        <Typography variant="body2" paragraph>
+          Continuous integration and deployment (CI/CD) pipelines are set up with GitHub Actions, automating the build, test, and deployment processes whenever changes are pushed to the repository. This ensures that updates to the portfolio are rolled out smoothly and efficiently.
+        </Typography>
+        <Typography variant="body2" paragraph>
+          Throughout the development process, best practices in software engineering, including version control with Git, code reviews, and testing, were followed to maintain code quality and ensure the reliability of the portfolio website.
+        </Typography>
+        <Typography variant="body2" paragraph>
+          Overall, this project not only showcases my technical skills in frontend and backend development but also demonstrates my ability to integrate various technologies into a cohesive and functional web application. 
+        </Typography>
+      </>
+    ),
+    links: [
+      { label: 'GitHub Repository', href: 'https://github.com/omerahmed05/personal-portfolio' },
+    ]
+  },  
   {
     title: 'AutoPrint: Automatic Print Statement Insertion Tool',
     logo: codeWorldLogo,
