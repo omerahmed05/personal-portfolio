@@ -137,27 +137,25 @@ const Notes = () => {
       )}
 
       {isAuthenticated && (
-        <>
-          <div className="note-form">
-            <input
-              type="text"
-              placeholder="Title"
-              value={noteTitle}
-              onChange={(e) => setNoteTitle(e.target.value)}
-            />
-            <ReactQuill
-              value={editorContent}
-              onChange={setEditorContent}
-              theme="snow"
-            />
-            <button onClick={handleAddNote}>
-              {selectedNote ? 'Update Note' : 'Add Note'}
-            </button>
-            {selectedNote && (
-              <button onClick={resetNoteFields}>Cancel</button>
-            )}
-          </div>
-        </>
+        <div className="note-form">
+          <input
+            type="text"
+            placeholder="Title"
+            value={noteTitle}
+            onChange={(e) => setNoteTitle(e.target.value)}
+          />
+          <ReactQuill
+            value={editorContent}
+            onChange={setEditorContent}
+            theme="snow"
+          />
+          <button onClick={handleAddNote}>
+            {selectedNote ? 'Update Note' : 'Add Note'}
+          </button>
+          {selectedNote && (
+            <button onClick={resetNoteFields}>Cancel</button>
+          )}
+        </div>
       )}
 
       {!isAuthenticated && (
