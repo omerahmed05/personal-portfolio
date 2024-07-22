@@ -1,4 +1,3 @@
-// netlify/functions/getNotes.js
 const admin = require('firebase-admin');
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
@@ -19,6 +18,10 @@ exports.handler = async () => {
       body: JSON.stringify(notes),
     };
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    console.error('Error fetching notes:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to fetch notes', details: error.toString() }),
+    };
   }
 };

@@ -1,13 +1,15 @@
 const admin = require('firebase-admin');
-const serviceAccount = require(process.env.FIREBASE_SERVICE_ACCOUNT);
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+}
 
 const db = admin.firestore();
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   try {
     const noteId = event.queryStringParameters.id;
     await db.collection('notes').doc(noteId).delete();
@@ -16,6 +18,10 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ success: true }),
     };
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    console.error('Error deleting note:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to delete note', details: error.toString() }),
+    };
   }
 };

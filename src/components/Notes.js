@@ -108,6 +108,7 @@ const Notes = () => {
     setEditorContent('');
     setSelectedCategory('');
     setSelectedNote(null);
+    setEditIndex(null);
   };
 
   const filteredNotes = selectedCategory

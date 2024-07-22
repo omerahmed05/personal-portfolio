@@ -1,13 +1,15 @@
 const admin = require('firebase-admin');
-const serviceAccount = require(process.env.FIREBASE_SERVICE_ACCOUNT);
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+}
 
 const db = admin.firestore();
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   try {
     const note = JSON.parse(event.body);
     const noteRef = await db.collection('notes').add(note);
@@ -16,6 +18,10 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ id: noteRef.id }),
     };
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    console.error('Error saving note:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to save note', details: error.toString() }),
+    };
   }
 };
