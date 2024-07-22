@@ -10,6 +10,7 @@ const Notes = () => {
   const [editorContent, setEditorContent] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categoryName, setCategoryName] = useState('');
+  const [categoryToEdit, setCategoryToEdit] = useState(null);
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
@@ -96,12 +97,34 @@ const Notes = () => {
     }
   };
 
-  const handleEditNote = (index) => {
-    const note = notes[index];
-    setNoteTitle(note.title);
-    setEditorContent(note.text);
-    setSelectedCategory(note.category);
-    setSelectedNote(note);
+  const handleEditNote = async () => {
+    if (isAuthenticated && selectedNote) {
+      const note = {
+        title: noteTitle,
+        text: editorContent,
+        category: selectedCategory,
+      };
+      try {
+        const response = await fetch(`/.netlify/functions/updateNote?id=${selectedNote.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(note),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const updatedNote = await response.json();
+        const newNotes = notes.map((n) => (n.id === updatedNote.id ? updatedNote : n));
+        setNotes(newNotes);
+        resetNoteFields();
+      } catch (error) {
+        alert('Failed to update note');
+      }
+    } else {
+      alert('You need to authenticate first');
+    }
   };
 
   const handleDeleteNote = async (index) => {
@@ -155,6 +178,53 @@ const Notes = () => {
     }
   };
 
+  const handleEditCategory = async () => {
+    if (categoryToEdit && categoryName) {
+      try {
+        const response = await fetch(`/.netlify/functions/updateCategory?id=${categoryToEdit.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: categoryName }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const updatedCategory = await response.json();
+        const newCategories = categories.map((cat) =>
+          cat.id === updatedCategory.id ? updatedCategory : cat
+        );
+        setCategories(newCategories);
+        setCategoryToEdit(null);
+        setCategoryName('');
+      } catch (error) {
+        console.error('Failed to update category:', error);
+        alert('Failed to update category');
+      }
+    }
+  };
+
+  const handleDeleteCategory = async (index) => {
+    if (isAuthenticated) {
+      const categoryId = categories[index].id;
+      try {
+        const response = await fetch(`/.netlify/functions/deleteCategory?id=${categoryId}`, { method: 'DELETE' });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const newCategories = categories.filter((_, i) => i !== index);
+        setCategories(newCategories);
+        setSelectedCategory('');
+      } catch (error) {
+        console.error('Failed to delete category:', error);
+        alert('Failed to delete category');
+      }
+    } else {
+      alert('You need to authenticate first');
+    }
+  };
+
   const resetNoteFields = () => {
     setNoteTitle('');
     setEditorContent('');
@@ -180,10 +250,10 @@ const Notes = () => {
         {categories.map((cat, index) => (
           <button
             key={index}
-            onClick={() => handleCategoryFilter(cat)}
-            className={selectedCategory === cat ? 'selected' : ''}
+            onClick={() => handleCategoryFilter(cat.name)}
+            className={selectedCategory === cat.name ? 'selected' : ''}
           >
-            {cat}
+            {cat.name}
           </button>
         ))}
       </div>
@@ -210,76 +280,79 @@ const Notes = () => {
           <div dangerouslySetInnerHTML={{ __html: selectedNote.text }} />
           {isAuthenticated && (
             <div className="note-actions">
-              <button onClick={() => handleEditNote(notes.findIndex(n => n.id === selectedNote.id))}>Edit</button>
+              <button onClick={() => {
+                setNoteTitle(selectedNote.title);
+                setEditorContent(selectedNote.text);
+                setSelectedCategory(selectedNote.category);
+              }}>Edit</button>
               <button onClick={() => handleDeleteNote(notes.findIndex(n => n.id === selectedNote.id))}>Delete</button>
             </div>
           )}
         </div>
       )}
 
-      {isAuthenticated && (
-        <>
-          <div className="note-form">
-            <h3>{selectedNote ? 'Edit Note' : 'Add Note'}</h3>
-            <input
-              type="text"
-              placeholder="Title"
-              value={noteTitle}
-              onChange={(e) => setNoteTitle(e.target.value)}
-              className="note-input"
-            />
-            <ReactQuill
-              value={editorContent}
-              onChange={setEditorContent}
-              theme="snow"
-              className="note-editor"
-            />
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="note-select"
-            >
-              <option value="">Select Category</option>
-              {categories.map((cat, index) => (
-                <option key={index} value={cat}>{cat}</option>
-              ))}
-            </select>
-            <div className="button-container">
-              <button onClick={handleAddNote} className="add-note-button">
-                {selectedNote ? 'Update Note' : 'Add Note'}
-              </button>
-              {selectedNote && (
-                <button onClick={resetNoteFields} className="cancel-button">Cancel</button>
-              )}
-            </div>
-          </div>
-
-          <div className="category-form">
-            <h3>Add Category</h3>
-            <input
-              type="text"
-              placeholder="New Category"
-              value={categoryName}
-              onChange={(e) => setCategoryName(e.target.value)}
-              className="category-input"
-            />
-            <div className="button-container">
-              <button onClick={handleAddCategory} className="add-category-button">Add Category</button>
-            </div>
-          </div>
-        </>
-      )}
-
-      {!isAuthenticated && (
+      {isAuthenticated ? (
+        <div className="add-edit-section">
+          <input
+            type="text"
+            value={noteTitle}
+            onChange={(e) => setNoteTitle(e.target.value)}
+            placeholder="Note Title"
+          />
+          <ReactQuill
+            value={editorContent}
+            onChange={setEditorContent}
+            placeholder="Write your note here..."
+          />
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">Select a Category</option>
+            {categories.map((cat, index) => (
+              <option key={index} value={cat.name}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+          <button onClick={selectedNote ? handleEditNote : handleAddNote}>
+            {selectedNote ? 'Update Note' : 'Add Note'}
+          </button>
+        </div>
+      ) : (
         <div className="auth-section">
           <input
             type="password"
-            placeholder="Enter password to authenticate"
             value={password}
             onChange={handlePasswordChange}
-            className="auth-input"
+            placeholder="Enter password"
           />
-          <button onClick={handleAuthentication} className="auth-button">Authenticate</button>
+          <button onClick={handleAuthentication}>Authenticate</button>
+        </div>
+      )}
+
+      {isAuthenticated && (
+        <div className="category-section">
+          <input
+            type="text"
+            value={categoryName}
+            onChange={(e) => setCategoryName(e.target.value)}
+            placeholder="Category Name"
+          />
+          <button onClick={categoryToEdit ? handleEditCategory : handleAddCategory}>
+            {categoryToEdit ? 'Update Category' : 'Add Category'}
+          </button>
+          {categories.length > 0 && (
+            <div className="category-list">
+              {categories.map((cat, index) => (
+                <div key={index} className="category-item">
+                  <span>{cat.name}</span>
+                  <button onClick={() => setCategoryToEdit(cat)}>Edit</button>
+                  <button onClick={() => handleDeleteCategory(index)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

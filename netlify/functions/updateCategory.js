@@ -3,22 +3,12 @@ const q = faunadb.query;
 const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
 
 exports.handler = async (event) => {
+  const { id } = event.queryStringParameters;
   const { name } = JSON.parse(event.body);
 
   try {
-    // Ensure no duplicates in categories
-    const existingCategory = await client.query(
-      q.Exists(q.Match(q.Index('categories_by_name'), name))
-    );
-    if (existingCategory) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Category already exists' }),
-      };
-    }
-
     const result = await client.query(
-      q.Create(q.Collection('categories'), { data: { name } })
+      q.Update(q.Ref(q.Collection('categories'), id), { data: { name } })
     );
     return {
       statusCode: 200,
