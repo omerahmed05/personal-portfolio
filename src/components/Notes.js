@@ -3,8 +3,6 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Notes.css';
 
-const authPassword = JSON.parse(process.env.PASSWORD);
-
 const Notes = () => {
   const [notes, setNotes] = useState([]);
   const [noteTitle, setNoteTitle] = useState('');
@@ -20,11 +18,24 @@ const Notes = () => {
 
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
-  const handleAuthentication = () => {
-    if (password === authPassword) {
-      setIsAuthenticated(true);
-    } else {
-      alert('Incorrect password');
+  const handleAuthentication = async () => {
+    try {
+      const response = await fetch('/.netlify/functions/validatePassword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+      const result = await response.json();
+      if (result.isAuthenticated) {
+        setIsAuthenticated(true);
+      } else {
+        alert('Incorrect password');
+      }
+    } catch (error) {
+      console.error('Failed to authenticate:', error);
+      alert('Failed to authenticate');
     }
   };
 
