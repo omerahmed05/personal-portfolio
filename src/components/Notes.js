@@ -102,6 +102,7 @@ const Notes = () => {
     setEditorContent(note.text);
     setSelectedCategory(note.category);
     setSelectedNote(note);
+    setEditIndex(index);
   };
 
   const handleDeleteNote = async (index) => {
@@ -217,46 +218,36 @@ const Notes = () => {
         </div>
       )}
 
-      <div className="note-form">
-        <input
-          type="text"
-          placeholder="Title"
-          value={noteTitle}
-          onChange={(e) => setNoteTitle(e.target.value)}
-        />
-        <ReactQuill
-          value={editorContent}
-          onChange={setEditorContent}
-          theme="snow"
-        />
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          <option value="">Select Category</option>
-          {categories.map((cat, index) => (
-            <option key={index} value={cat}>{cat}</option>
-          ))}
-        </select>
-        <button onClick={handleAddNote}>
-          {selectedNote ? 'Update Note' : 'Add Note'}
-        </button>
-        {selectedNote && (
-          <button onClick={resetNoteFields}>Cancel</button>
-        )}
-      </div>
-
-      <div className="category-form">
-        <input
-          type="text"
-          placeholder="New Category"
-          value={categoryName}
-          onChange={(e) => setCategoryName(e.target.value)}
-        />
-        <button onClick={handleAddCategory}>Add Category</button>
-      </div>
-
-      {!isAuthenticated && (
+      {isAuthenticated ? (
+        <div className="note-form">
+          <input
+            type="text"
+            placeholder="Title"
+            value={noteTitle}
+            onChange={(e) => setNoteTitle(e.target.value)}
+          />
+          <ReactQuill
+            value={editorContent}
+            onChange={setEditorContent}
+            theme="snow"
+          />
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat, index) => (
+              <option key={index} value={cat}>{cat}</option>
+            ))}
+          </select>
+          <button onClick={handleAddNote}>
+            {selectedNote ? 'Update Note' : 'Add Note'}
+          </button>
+          {selectedNote && (
+            <button onClick={resetNoteFields}>Cancel</button>
+          )}
+        </div>
+      ) : (
         <div className="auth-section">
           <input
             type="password"
@@ -265,6 +256,18 @@ const Notes = () => {
             onChange={handlePasswordChange}
           />
           <button onClick={handleAuthentication}>Authenticate</button>
+        </div>
+      )}
+
+      {isAuthenticated && (
+        <div className="category-form">
+          <input
+            type="text"
+            placeholder="New Category"
+            value={categoryName}
+            onChange={(e) => setCategoryName(e.target.value)}
+          />
+          <button onClick={handleAddCategory}>Add Category</button>
         </div>
       )}
     </div>
