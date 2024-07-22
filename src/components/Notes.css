@@ -90,7 +90,8 @@
   text-align: left;
 }
 
-.note-form input[type="text"] {
+.note-title-input,
+.auth-input {
   width: calc(100% - 20px); /* Adding margin to both sides */
   padding: 10px;
   margin: 5px 10px;
@@ -98,7 +99,8 @@
   border-radius: 4px;
 }
 
-.note-form button {
+.note-form button,
+.auth-section button {
   margin: 10px auto; /* Centering the button */
   padding: 10px 15px;
   border: none;
@@ -120,6 +122,11 @@
 /* Authentication Section */
 .auth-section {
   margin-top: 20px;
+  text-align: center; /* Centering the auth section */
+}
+
+.auth-section h2 {
+  margin-top: 0;
 }
 
 .auth-section input[type="password"] {
@@ -131,12 +138,12 @@
 }
 
 .auth-button {
-  margin: 10px auto; /* Centering the button */
+  margin-top: 10px;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
-  color: #fff;
   background-color: #007bff;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
   display: block;

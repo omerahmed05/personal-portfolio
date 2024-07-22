@@ -149,6 +149,7 @@ const Notes = () => {
             placeholder="Title"
             value={noteTitle}
             onChange={(e) => setNoteTitle(e.target.value)}
+            className="note-title-input"
           />
           <ReactQuill
             value={editorContent}
@@ -171,6 +172,7 @@ const Notes = () => {
             placeholder="Enter password to authenticate"
             value={password}
             onChange={handlePasswordChange}
+            className="auth-input"
           />
           <button className="auth-button" onClick={handleAuthentication}>Authenticate</button>
         </div>
