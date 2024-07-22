@@ -102,7 +102,6 @@ const Notes = () => {
     setEditorContent(note.text);
     setSelectedCategory(note.category);
     setSelectedNote(note);
-    setEditIndex(index);
   };
 
   const handleDeleteNote = async (index) => {
