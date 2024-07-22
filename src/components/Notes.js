@@ -36,7 +36,6 @@ const Notes = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Fetched Notes:", data); // Log the fetched data
       if (!Array.isArray(data)) {
         throw new Error('Data is not an array');
       }
@@ -45,7 +44,7 @@ const Notes = () => {
       console.error('Failed to fetch notes:', error);
       alert('Failed to fetch notes');
     }
-  };  
+  };
 
   const handleAddNote = async () => {
     if (!selectedCategory) {
@@ -61,8 +60,14 @@ const Notes = () => {
       try {
         const response = await fetch('/.netlify/functions/saveNote', {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify(note),
         });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
         setNotes([...notes, { ...note, id: data.id }]);
         resetNoteFields();
@@ -87,7 +92,10 @@ const Notes = () => {
     if (isAuthenticated) {
       const noteId = notes[index].id;
       try {
-        await fetch(`/.netlify/functions/deleteNote?id=${noteId}`, { method: 'DELETE' });
+        const response = await fetch(`/.netlify/functions/deleteNote?id=${noteId}`, { method: 'DELETE' });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const newNotes = notes.filter((_, i) => i !== index);
         setNotes(newNotes);
         setSelectedNote(null);
@@ -116,7 +124,6 @@ const Notes = () => {
     setEditorContent('');
     setSelectedCategory('');
     setSelectedNote(null);
-    setEditIndex(null);
   };
 
   const filteredNotes = selectedCategory

@@ -11,9 +11,17 @@ const db = admin.firestore();
 
 exports.handler = async () => {
   try {
+    console.log('Attempting to fetch notes from Firestore...');
     const notesSnapshot = await db.collection('notes').get();
+    if (notesSnapshot.empty) {
+      console.log('No matching documents found.');
+      return {
+        statusCode: 200,
+        body: JSON.stringify([]), // Return an empty array if no documents are found
+      };
+    }
     const notes = notesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    console.log("Notes from Firestore:", notes); // Log notes fetched from Firestore
+    console.log('Fetched notes:', notes);
     return {
       statusCode: 200,
       body: JSON.stringify(notes),
