@@ -123,13 +123,13 @@
   text-align: left;
 }
 
-.note-title-input,
-.auth-input {
-  width: calc(100% - 20px);
+.note-title-input {
+  width: 100%;
   padding: 10px;
-  margin: 5px 10px;
+  margin: 5px 0;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .rich-editor .ql-editor {
@@ -166,12 +166,13 @@
   margin-top: 0;
 }
 
-.auth-section input[type="password"] {
-  width: calc(100% - 20px);
+.auth-input {
+  width: calc(100% - 40px);
   padding: 10px;
-  margin: 5px 10px;
+  margin: 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .auth-button {
