@@ -97,10 +97,9 @@
   background-color: #e0a800; 
 }
 
-/* Add this at an appropriate place in your Notes.css */
 .close-button {
-  background-color: #6c757d; /* Change this to your desired color */
-  color: #fff; /* Text color */
+  background-color: #6c757d; 
+  color: #fff; 
   margin: 5px;
   padding: 8px 12px;
   border: none;
@@ -110,7 +109,7 @@
 }
 
 .close-button:hover {
-  background-color: #5a6268; /* Darker shade for hover effect */
+  background-color: #5a6268; 
 }
 
 /* Form Styles */
