@@ -17,6 +17,7 @@ const Notes = () => {
 
   useEffect(() => {
     fetchNotes();
+    fetchCategories();
   }, []);
 
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -43,6 +44,23 @@ const Notes = () => {
     } catch (error) {
       console.error('Failed to fetch notes:', error);
       alert('Failed to fetch notes');
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/.netlify/functions/getCategories');
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      if (!Array.isArray(data)) {
+        throw new Error('Data is not an array');
+      }
+      setCategories(data);
+    } catch (error) {
+      console.error('Failed to fetch categories:', error);
+      alert('Failed to fetch categories');
     }
   };
 
@@ -112,10 +130,30 @@ const Notes = () => {
     setSelectedCategory(category);
   };
 
-  const handleAddCategory = () => {
+  const handleAddCategory = async () => {
     if (categoryName && !categories.includes(categoryName)) {
-      setCategories([...categories, categoryName]);
-      setCategoryName('');
+      try {
+        const response = await fetch('/.netlify/functions/addCategory', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: categoryName }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        if (data.success) {
+          setCategories([...categories, categoryName]);
+          setCategoryName('');
+        } else {
+          alert('Failed to add category');
+        }
+      } catch (error) {
+        console.error('Failed to add category:', error);
+        alert('Failed to add category');
+      }
     }
   };
 
@@ -174,74 +212,63 @@ const Notes = () => {
           <div dangerouslySetInnerHTML={{ __html: selectedNote.text }} />
           {isAuthenticated && (
             <div className="note-actions">
-              <button onClick={() => handleEditNote(notes.findIndex(note => note === selectedNote))} className="edit-button">Edit</button>
-              <button onClick={() => handleDeleteNote(notes.findIndex(note => note === selectedNote))} className="delete-button">Delete</button>
-              <button onClick={() => setSelectedNote(null)} className="close-button">Close</button>
+              <button onClick={() => handleEditNote(notes.findIndex(n => n.id === selectedNote.id))}>Edit</button>
+              <button onClick={() => handleDeleteNote(notes.findIndex(n => n.id === selectedNote.id))}>Delete</button>
             </div>
           )}
         </div>
       )}
 
-      <div className="auth-section">
-        {!isAuthenticated ? (
-          <>
-            <h2>Authenticate to Add, Edit, or Delete Notes</h2>
-            <input
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            <button onClick={handleAuthentication}>Authenticate</button>
-          </>
-        ) : (
-          <div className="editor-section">
-            <div className="add-note">
-              <h2>{editIndex !== null ? 'Edit Note' : 'Add Note'}</h2>
-              <input
-                type="text"
-                value={noteTitle}
-                onChange={(e) => setNoteTitle(e.target.value)}
-                placeholder="Note title"
-              />
-              <ReactQuill
-                value={editorContent}
-                onChange={setEditorContent}
-                modules={{
-                  toolbar: [
-                    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-                    [{ size: [] }],
-                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-                    ['link', 'image'],
-                    ['clean']
-                  ],
-                }}
-              />
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                <option value="">Select Category</option>
-                {categories.map((cat, index) => (
-                  <option key={index} value={cat}>{cat}</option>
-                ))}
-              </select>
-              <button onClick={handleAddNote}>{editIndex !== null ? 'Update Note' : 'Add Note'}</button>
-            </div>
-            <div className="add-category">
-              <h2>Add Category</h2>
-              <input
-                type="text"
-                value={categoryName}
-                onChange={(e) => setCategoryName(e.target.value)}
-                placeholder="Category name"
-              />
-              <button onClick={handleAddCategory}>Add Category</button>
-            </div>
-          </div>
+      <div className="note-form">
+        <input
+          type="text"
+          placeholder="Title"
+          value={noteTitle}
+          onChange={(e) => setNoteTitle(e.target.value)}
+        />
+        <ReactQuill
+          value={editorContent}
+          onChange={setEditorContent}
+          theme="snow"
+        />
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="">Select Category</option>
+          {categories.map((cat, index) => (
+            <option key={index} value={cat}>{cat}</option>
+          ))}
+        </select>
+        <button onClick={handleAddNote}>
+          {selectedNote ? 'Update Note' : 'Add Note'}
+        </button>
+        {selectedNote && (
+          <button onClick={resetNoteFields}>Cancel</button>
         )}
       </div>
+
+      <div className="category-form">
+        <input
+          type="text"
+          placeholder="New Category"
+          value={categoryName}
+          onChange={(e) => setCategoryName(e.target.value)}
+        />
+        <button onClick={handleAddCategory}>Add Category</button>
+      </div>
+
+      {!isAuthenticated && (
+        <div className="auth-section">
+          <input
+            type="password"
+            placeholder="Enter password to authenticate"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <button onClick={handleAuthentication}>Authenticate</button>
+        </div>
+      )}
     </div>
   );
 };
