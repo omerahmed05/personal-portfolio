@@ -13,6 +13,7 @@ exports.handler = async () => {
   try {
     const notesSnapshot = await db.collection('notes').get();
     const notes = notesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log("Notes from Firestore:", notes); // Log notes fetched from Firestore
     return {
       statusCode: 200,
       body: JSON.stringify(notes),

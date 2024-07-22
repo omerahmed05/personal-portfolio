@@ -32,12 +32,20 @@ const Notes = () => {
   const fetchNotes = async () => {
     try {
       const response = await fetch('/.netlify/functions/getNotes');
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
       const data = await response.json();
+      console.log("Fetched Notes:", data); // Log the fetched data
+      if (!Array.isArray(data)) {
+        throw new Error('Data is not an array');
+      }
       setNotes(data);
     } catch (error) {
+      console.error('Failed to fetch notes:', error);
       alert('Failed to fetch notes');
     }
-  };
+  };  
 
   const handleAddNote = async () => {
     if (!selectedCategory) {
