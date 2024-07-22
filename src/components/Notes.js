@@ -100,9 +100,29 @@ const Notes = () => {
 
   const handleUpdateNote = async () => {
     if (isAuthenticated && selectedNote) {
-      await handleDeleteNote(selectedNote.id);
-      handleAddNote();
-      setIsEditing(false);
+      const updatedNote = {
+        title: noteTitle,
+        text: editorContent,
+      };
+      try {
+        const response = await fetch(`/.netlify/functions/updateNote?id=${selectedNote.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedNote),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const updatedNotes = notes.map(note => note.id === selectedNote.id ? { ...note, ...updatedNote } : note);
+        setNotes(updatedNotes);
+        resetNoteFields();
+      } catch (error) {
+        alert('Failed to update note');
+      }
+    } else {
+      alert('You need to authenticate first');
     }
   };
 
