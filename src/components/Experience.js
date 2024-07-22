@@ -29,11 +29,11 @@ function Experience() {
           <h4 className="vertical-timeline-element-subtitle">Blacksburg, Virginia</h4>
           <div className="timeline-text">
             <p>
-              During my time as a Research Intern at the <strong>Code World, No Blanket Lab</strong>, I received mentorship from and assisted PhD student Minhyuk Ko and our advisor Chris Brown with the debugging tool project.
+              During my time as a Research Intern at the <strong>Code World, No Blanket Lab</strong>, I received mentorship from and assisted PhD student Minhyuk Ko and our advisor Chris Brown with the debugging tool project. 
               {showMore.cwnb ? (
                 <>
-                  I played a crucial role in refining the software architecture. By replacing regular expressions (RegEx) with JavaParser, we achieved a notable reduction in code execution time, significantly enhancing the tool’s performance.
-                  In addition, I supported a study analyzing the effectiveness of AI tools for debugging. This research provided valuable insights into user preferences and the efficacy of various debugging methodologies. My active involvement in lab discussions was instrumental, as I provided feedback on research papers and helped ensure the high quality of our research outputs.
+                  I played a crucial role in refining the software architecture. By replacing regular expressions (RegEx) with JavaParser, we achieved a notable reduction in code execution time, significantly enhancing the tool’s performance. 
+                  In addition, I supported a study analyzing the effectiveness of AI tools for debugging. This research provided valuable insights into user preferences and the efficacy of various debugging methodologies. My active involvement in lab discussions was instrumental, as I provided feedback on research papers and helped ensure the high quality of our research outputs. 
                   For my personal study on "AI Tools vs. Debugging Tools: Exploring User Perceptions on Bug Locating Performance," I received significant recognition, securing 1st Place at the VA–NC Alliance Undergraduate Research Symposium and 2nd Place at the Dr. Wayne Scales Undergraduate Research Symposium. This research shed light on how users perceive the efficiency and ease of use of different debugging tools, offering valuable contributions to the academic understanding of debugging methodologies.
                 </>
               ) : (
@@ -56,10 +56,10 @@ function Experience() {
           <h4 className="vertical-timeline-element-subtitle">Blacksburg, Virginia</h4>
           <div className="timeline-text">
             <p>
-              In my role as a Research Assistant at <strong>REACH Lab</strong>, I worked closely with my partner Aisha Ismael and research advisor Dr. Ihudiya Finda Williams on the First Generation Low-Income (FGLI) project.
+              In my role as a Research Assistant at <strong>REACH Lab</strong>, I worked closely with my partner Aisha Ismael and research advisor Dr. Ihudiya Finda Williams on the First Generation Low-Income (FGLI) project. 
               {showMore.reach ? (
                 <>
-                  This project examined how FGLI students use technology to navigate the social aspects of college. My role involved conducting a thorough literature review to understand the challenges faced by FGLI students, such as difficulties in adapting to college life and engaging with social norms. I developed and applied advanced research techniques, including searching for relevant papers and detecting papers with false data, to uncover relevant studies and insights. Additionally, I learned skimming techniques to efficiently read papers.
+                  This project examined how FGLI students use technology to navigate the social aspects of college. My role involved conducting a thorough literature review to understand the challenges faced by FGLI students, such as difficulties in adapting to college life and engaging with social norms. I developed and applied advanced research techniques, including searching for relevant papers and detecting papers with false data, to uncover relevant studies and insights. Additionally, I learned skimming techniques to efficiently read papers. 
                   I also played a key role in creating support tools tailored for low-income engineering students, aimed at improving their academic and social experiences. I contributed to enhancing the lab’s website, utilizing CSS, HTML, and JavaScript to improve its functionality and user experience.
                 </>
               ) : (
@@ -82,10 +82,10 @@ function Experience() {
           <h4 className="vertical-timeline-element-subtitle">Charlotte, NC (Remote)</h4>
           <div className="timeline-text">
             <p>
-              As a Software Engineer at <strong>Xylem Inc.</strong>, I developed a real-time timeline view for the RNI Scheduler, a critical application for managing jobs on Remote Network Interface (RNI) servers that facilitate smart utility readings and reports.
+              As a Software Engineer at <strong>Xylem Inc.</strong>, I developed a real-time timeline view for the RNI Scheduler, a critical application for managing jobs on Remote Network Interface (RNI) servers that facilitate smart utility readings and reports. 
               {showMore.xylem ? (
                 <>
-                  Utilizing Angular, FullCalendar, and REST APIs, I transformed the scheduler's user interface from a static tabular format to a dynamic, visually intuitive timeline. To ensure data accuracy and efficiency, the REST API was designed to invoke stored procedures in the company's SQL database using JDBC, fetching real-time job information.
+                  Utilizing Angular, FullCalendar, and REST APIs, I transformed the scheduler's user interface from a static tabular format to a dynamic, visually intuitive timeline. To ensure data accuracy and efficiency, the REST API was designed to invoke stored procedures in the company's SQL database using JDBC, fetching real-time job information. 
                   The new timeline view provides users with a clear overview of job interactions, enabling them to effectively track and manage tasks across the RNI network. For instance, long-running report generation processes, which can consume substantial memory and processing power, are now clearly visible, preventing users from accidentally initiating duplicate jobs. By visually indicating the status of jobs, including those with long runtimes like report generation, the timeline prevents unnecessary resource consumption and reduces system load. This enhanced visibility has significantly improved operational efficiency, decreased wait times for users, and minimized support inquiries related to job status.
                 </>
               ) : (
