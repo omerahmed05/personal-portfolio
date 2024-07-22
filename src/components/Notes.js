@@ -166,9 +166,7 @@ const Notes = () => {
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
             <option value="">Select Category</option>
-            {categories.map((cat, index) => (
-              <option key={index} value={cat}>{cat}</option>
-            ))}
+            {/* Add category options here if needed */}
           </select>
           <button className="submit-button" onClick={handleAddNote}>
             {selectedNote ? 'Update Note' : 'Add Note'}
