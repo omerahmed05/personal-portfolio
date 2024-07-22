@@ -47,11 +47,11 @@ const App = () => {
         <ListItem button component={Link} to="/projects" onClick={toggleDrawer(false)}>
           <ListItemText primary="Projects" />
         </ListItem>
-        <ListItem button component={Link} to="/contact" onClick={toggleDrawer(false)}>
-          <ListItemText primary="Contact" />
-        </ListItem>
         <ListItem button component={Link} to="/notes" onClick={toggleDrawer(false)}>
           <ListItemText primary="Notes" />
+        </ListItem>
+        <ListItem button component={Link} to="/contact" onClick={toggleDrawer(false)}>
+          <ListItemText primary="Contact" />
         </ListItem>
       </List>
     </div>
