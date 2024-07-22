@@ -41,7 +41,7 @@ const projects = [
       </>
     ),
     links: [
-      { label: 'GitHub Repository', href: 'https://github.com/omerahmed05/personal-portfolio' },
+      { label: 'GitHub', href: 'https://github.com/omerahmed05/personal-portfolio' },
     ]
   },  
   {
