@@ -1,13 +1,16 @@
+// netlify/functions/getNotes.js
 const admin = require('firebase-admin');
-const serviceAccount = require(process.env.FIREBASE_SERVICE_ACCOUNT);
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+}
 
 const db = admin.firestore();
 
-exports.handler = async (event, context) => {
+exports.handler = async () => {
   try {
     const notesSnapshot = await db.collection('notes').get();
     const notes = notesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
