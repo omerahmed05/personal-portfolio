@@ -3,49 +3,33 @@
   max-width: 800px;
   margin: auto;
   font-family: Arial, sans-serif;
-}
-
-/* Filter Section */
-.filter-section {
-  margin-bottom: 20px;
-}
-
-.filter-section button {
-  margin: 5px;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.filter-section button:hover {
-  background-color: #e0e0e0;
-}
-
-.selected {
-  font-weight: bold;
-  color: #007bff;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Notes List */
 .notes-list {
   margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .note-card {
   cursor: pointer;
   padding: 15px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  border-radius: 10px;
   background-color: #f9f9f9;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s;
+  flex: 1 1 calc(33% - 20px);
+  box-sizing: border-box;
 }
 
 .note-card:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .note-title {
@@ -58,7 +42,7 @@
 .note-details {
   border: 1px solid #ddd;
   padding: 15px;
-  border-radius: 4px;
+  border-radius: 10px;
   margin-top: 20px;
   background-color: #f9f9f9;
 }
@@ -89,15 +73,15 @@
 }
 
 /* Form Styles */
-.note-form, .category-form {
+.note-form {
   margin-top: 20px;
   border: 1px solid #ddd;
   padding: 15px;
-  border-radius: 4px;
+  border-radius: 10px;
   background-color: #f9f9f9;
 }
 
-.note-form input[type="text"], .category-form input[type="text"], .note-form select {
+.note-form input[type="text"] {
   width: 100%;
   padding: 10px;
   margin: 5px 0;
@@ -105,7 +89,7 @@
   border-radius: 4px;
 }
 
-.note-form button, .category-form button {
+.note-form button {
   margin: 10px 5px 0;
   padding: 10px 15px;
   border: none;
@@ -119,24 +103,16 @@
   background-color: #28a745;
 }
 
-.category-form .submit-button {
-  background-color: #007bff;
-}
-
-.note-form .submit-button:hover, .category-form .submit-button:hover {
+.note-form .submit-button:hover {
   background-color: #218838;
 }
 
 /* Authentication Section */
-.authentication-section {
+.auth-section {
   margin-top: 20px;
 }
 
-.authentication-section h2 {
-  margin-top: 0;
-}
-
-.authentication-section input[type="password"] {
+.auth-section input[type="password"] {
   width: 100%;
   padding: 10px;
   margin: 5px 0;
@@ -157,30 +133,4 @@
 
 .auth-button:hover {
   background-color: #0056b3;
-}
-
-/* Category Management */
-.category-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 0;
-}
-
-.category-actions {
-  display: flex;
-  align-items: center;
-}
-
-.category-actions .edit-button, .category-actions .delete-button {
-  margin-left: 5px;
-  padding: 5px 10px;
-}
-
-.category-actions .edit-button {
-  background-color: #007bff;
-}
-
-.category-actions .delete-button {
-  background-color: #dc3545;
 }

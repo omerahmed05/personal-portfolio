@@ -7,7 +7,6 @@ const Notes = () => {
   const [notes, setNotes] = useState([]);
   const [noteTitle, setNoteTitle] = useState('');
   const [editorContent, setEditorContent] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
@@ -44,15 +43,10 @@ const Notes = () => {
   };
 
   const handleAddNote = async () => {
-    if (!selectedCategory) {
-      alert('Please select a category');
-      return;
-    }
     if (isAuthenticated) {
       const note = {
         title: noteTitle,
         text: editorContent,
-        category: selectedCategory,
       };
       try {
         const response = await fetch('/.netlify/functions/saveNote', {
@@ -80,7 +74,6 @@ const Notes = () => {
     const note = notes[index];
     setNoteTitle(note.title);
     setEditorContent(note.text);
-    setSelectedCategory(note.category);
     setSelectedNote(note);
   };
 
@@ -107,23 +100,18 @@ const Notes = () => {
   const resetNoteFields = () => {
     setNoteTitle('');
     setEditorContent('');
-    setSelectedCategory('');
     setSelectedNote(null);
   };
-
-  const filteredNotes = selectedCategory
-    ? notes.filter(note => note.category === selectedCategory)
-    : notes;
 
   return (
     <div className="notes-container">
       <h1>Notes</h1>
 
       <div className="notes-list">
-        {filteredNotes.length === 0 ? (
+        {notes.length === 0 ? (
           <p style={{ textAlign: 'center', fontSize: '16px', color: '#666' }}>No notes available</p>
         ) : (
-          filteredNotes.map((note, index) => (
+          notes.map((note, index) => (
             <div
               key={index}
               className="note-card"
@@ -161,13 +149,6 @@ const Notes = () => {
             onChange={setEditorContent}
             theme="snow"
           />
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="">Select Category</option>
-            {/* Add category options here if needed */}
-          </select>
           <button className="submit-button" onClick={handleAddNote}>
             {selectedNote ? 'Update Note' : 'Add Note'}
           </button>
