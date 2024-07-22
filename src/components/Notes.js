@@ -205,7 +205,7 @@ const Notes = () => {
           <button className="submit-button" onClick={isEditing ? handleUpdateNote : handleAddNote}>
             {isEditing ? 'Update Note' : 'Add Note'}
           </button>
-          {selectedNote && (
+          {isEditing && (
             <button className="cancel-button" onClick={resetNoteFields}>Cancel</button>
           )}
         </div>
