@@ -165,12 +165,8 @@ const Notes = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        if (data.success) {
-          setCategories([...categories, categoryName]);
-          setCategoryName('');
-        } else {
-          alert('Failed to add category');
-        }
+        setCategories([...categories, { ...data, name: categoryName }]);
+        setCategoryName('');
       } catch (error) {
         console.error('Failed to add category:', error);
         alert('Failed to add category');
@@ -269,6 +265,7 @@ const Notes = () => {
               onClick={() => setSelectedNote(note)}
             >
               <h3 className="note-title">{note.title}</h3>
+              <div dangerouslySetInnerHTML={{ __html: note.text }} />
             </div>
           ))
         )}
