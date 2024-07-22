@@ -6,7 +6,7 @@ body {
 .notes-container {
   max-width: 1000px;
   margin: 2rem auto;
-  padding: 1rem 20px; 
+  padding: 1rem 20px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -48,119 +48,114 @@ h1 {
 .notes-list {
   display: flex;
   flex-wrap: wrap;
+  gap: 15px;
   justify-content: center;
-  gap: 20px;
 }
 
 .note-card {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  padding: 10px;
-  width: 200px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 .note-card:hover {
-  background: #e9ecef;
+  background: #f1f1f1;
 }
 
 .note-title {
-  margin: 0;
   font-size: 18px;
   color: #333;
 }
 
 .note-details {
   margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  background: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
 }
 
 .note-actions {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .edit-button, .delete-button, .close-button {
-  margin-right: 10px;
+  width: 100%;
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
 }
 
-.auth-section, .editor-section, .add-note, .add-category {
-  text-align: center;
+.edit-button {
+  background: #ff6f00;
+}
+
+.delete-button {
+  background: #dc3545;
+}
+
+.close-button {
+  background: #007bff;
+}
+
+.edit-button:hover {
+  background: #e65c00;
+}
+
+.delete-button:hover {
+  background: #c82333;
+}
+
+.close-button:hover {
+  background: #0056b3;
+}
+
+.note-actions .close-button {
+  margin-bottom: 0;
 }
 
 .editor-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  gap: 20px;
-}
-
-.editor-wrapper {
-  width: 100%; 
-  max-width: 800px; 
-  margin: 0 auto; 
-}
-
-.editorClassName {
-  min-height: 150px;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  padding: 10px;
-  width: 100%; 
-}
-
-.ql-container {
-  width: 100%; 
-  box-sizing: border-box;
-}
-
-.ql-editor {
-  min-height: 150px;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-}
-
-.ql-toolbar {
-  border-bottom: 1px solid #dee2e6;
-  border-radius: 4px 4px 0 0;
+  margin-top: 20px;
 }
 
 .add-note, .add-category {
   margin-bottom: 20px;
 }
 
-input[type="text"], input[type="password"], select {
-  width: calc(100% - 40px);
+.add-note input, .add-category input {
+  width: 100%;
   padding: 10px;
-  margin: 5px 0 5px 0; 
-  border: 1px solid #dee2e6;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  box-sizing: border-box; 
 }
 
-button {
-  padding: 10px 20px;
-  background: #007bff;
+.add-note button, .add-category button {
+  width: 100%;
+  padding: 10px;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  background: #007bff;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.add-note button:hover, .add-category button:hover {
   background: #0056b3;
 }
 
-button:disabled {
-  background: #6c757d;
-}
-
-.center-button {
-  display: block;
-  margin: 10px auto; 
+.auth-section {
+  margin-top: 20px;
+  text-align: center;
 }

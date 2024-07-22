@@ -176,9 +176,9 @@ const Notes = () => {
             <div className="note-actions">
               <button onClick={() => handleEditNote(notes.findIndex(note => note === selectedNote))} className="edit-button">Edit</button>
               <button onClick={() => handleDeleteNote(notes.findIndex(note => note === selectedNote))} className="delete-button">Delete</button>
+              <button onClick={() => setSelectedNote(null)} className="close-button">Close</button>
             </div>
           )}
-          <button onClick={() => setSelectedNote(null)} className="close-button">Close</button>
         </div>
       )}
 
