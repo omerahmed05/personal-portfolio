@@ -220,42 +220,48 @@ const Notes = () => {
       {isAuthenticated && (
         <>
           <div className="note-form">
+            <h3>{selectedNote ? 'Edit Note' : 'Add Note'}</h3>
             <input
               type="text"
               placeholder="Title"
               value={noteTitle}
               onChange={(e) => setNoteTitle(e.target.value)}
+              className="note-input"
             />
             <ReactQuill
               value={editorContent}
               onChange={setEditorContent}
               theme="snow"
+              className="note-editor"
             />
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
+              className="note-select"
             >
               <option value="">Select Category</option>
               {categories.map((cat, index) => (
                 <option key={index} value={cat}>{cat}</option>
               ))}
             </select>
-            <button onClick={handleAddNote}>
+            <button onClick={handleAddNote} className="add-note-button">
               {selectedNote ? 'Update Note' : 'Add Note'}
             </button>
             {selectedNote && (
-              <button onClick={resetNoteFields}>Cancel</button>
+              <button onClick={resetNoteFields} className="cancel-button">Cancel</button>
             )}
           </div>
 
           <div className="category-form">
+            <h3>Add Category</h3>
             <input
               type="text"
               placeholder="New Category"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
+              className="category-input"
             />
-            <button onClick={handleAddCategory}>Add Category</button>
+            <button onClick={handleAddCategory} className="add-category-button">Add Category</button>
           </div>
         </>
       )}
@@ -267,8 +273,9 @@ const Notes = () => {
             placeholder="Enter password to authenticate"
             value={password}
             onChange={handlePasswordChange}
+            className="auth-input"
           />
-          <button onClick={handleAuthentication}>Authenticate</button>
+          <button onClick={handleAuthentication} className="auth-button">Authenticate</button>
         </div>
       )}
     </div>
