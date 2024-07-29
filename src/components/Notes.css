@@ -59,6 +59,16 @@
   margin-top: 0;
 }
 
+.note-details ul,
+.note-details ol {
+  margin-left: 20px;
+}
+
+.note-details ul li,
+.note-details ol li {
+  margin-bottom: 5px;
+}
+
 .note-actions {
   margin-top: 10px;
 }
