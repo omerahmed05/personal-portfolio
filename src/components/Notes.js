@@ -60,7 +60,7 @@ const Notes = () => {
     if (isAuthenticated) {
       const note = {
         title: noteTitle,
-        text: editorContent,
+        text: editorContent.trim(), // trim trailing new line characters
       };
       try {
         const response = await fetch('/.netlify/functions/saveNote', {
@@ -115,7 +115,7 @@ const Notes = () => {
     if (isAuthenticated && selectedNote) {
       const updatedNote = {
         title: noteTitle,
-        text: editorContent,
+        text: editorContent.trim(), // trim trailing new line characters
       };
       try {
         const response = await fetch(`/.netlify/functions/updateNote?id=${selectedNote.id}`, {
@@ -174,7 +174,10 @@ const Notes = () => {
       {selectedNote && (
         <div className="note-details">
           <h2>{selectedNote.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: selectedNote.text }} />
+          <pre
+            dangerouslySetInnerHTML={{ __html: selectedNote.text }}
+            className="note-content"
+          />
           <div className="note-actions">
             {isAuthenticated && (
               <>
@@ -201,6 +204,21 @@ const Notes = () => {
             onChange={setEditorContent}
             theme="snow"
             className="rich-editor"
+            modules={{
+              toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],
+                ['blockquote', 'code-block'],
+                [{ header: 1 }, { header: 2 }],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                [{ indent: '-1' }, { indent: '+1' }],
+                [{ direction: 'rtl' }],
+                ['link', 'image'],
+                ['clean'],
+              ],
+              renderHTML: (html) => {
+                return html.replace(/<p>/g, '<pre>').replace(/<\/p>/g, '</pre>');
+              },
+            }}
           />
           <button className="submit-button" onClick={isEditing ? handleUpdateNote : handleAddNote}>
             {isEditing ? 'Update Note' : 'Add Note'}

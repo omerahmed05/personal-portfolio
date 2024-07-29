@@ -59,34 +59,20 @@
   margin-top: 0;
 }
 
-.note-details ul,
-.note-details ol {
-  margin-left: 20px;
-}
-
-.note-details ul li,
-.note-details ol li {
-  margin-bottom: 5px;
-}
-
 .note-actions {
   margin-top: 10px;
 }
 
 .edit-button,
-.delete-button,
-.cancel-button,
-.close-button {
+.delete-button {
   margin: 5px;
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-/* Buttons */
 .edit-button {
   background-color: #007bff;
 }
@@ -96,19 +82,34 @@
 }
 
 .cancel-button {
-  background-color: #ffc107;
+  background-color: #ffc107; 
+  color: #fff;
+  margin: 10px auto;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block;
 }
 
 .cancel-button:hover {
-  background-color: #e0a800;
+  background-color: #e0a800; 
 }
 
 .close-button {
-  background-color: #6c757d;
+  background-color: #6c757d; 
+  color: #fff; 
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .close-button:hover {
-  background-color: #5a6268;
+  background-color: #5a6268; 
 }
 
 /* Form Styles */
@@ -130,7 +131,6 @@
   box-sizing: border-box;
 }
 
-/* Rich Editor */
 .rich-editor .ql-editor {
   background-color: #fff;
 }
@@ -188,25 +188,4 @@
 
 .auth-button:hover {
   background-color: #0056b3;
-}
-
-/* Filter Buttons */
-.filter-button {
-  padding: 10px 15px;
-  margin: 5px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.filter-button:hover {
-  background-color: #0056b3;
-}
-
-.filter-button.active {
-  background-color: #0056b3;
-  font-weight: bold;
 }
