@@ -17,7 +17,7 @@ const About = () => {
               <MuiLink href="https://x.com/OmerAhmedib" target="_blank" rel="noopener" mr={1}>X</MuiLink>
               <MuiLink href="https://linkedin.com/in/omah" target="_blank" rel="noopener" mr={1}>LinkedIn</MuiLink>
               <MuiLink href="https://github.com/omerahmed05" target="_blank" rel="noopener" mr={1}>GitHub</MuiLink>
-              <MuiLink href="https://drive.google.com/file/d/1DsSYIk0o9CJrgPoknqgODChYa0RzhHrz/view?usp=sharing" target="_blank" rel="noopener" mr={1}>Resume</MuiLink>
+              <MuiLink href="https://drive.google.com/file/d/1NGfs0TfTetGm5gefOk5lB5Vrcor6SFRl/view?usp=sharing" target="_blank" rel="noopener" mr={1}>Resume</MuiLink>
               <MuiLink href="https://www.kaggle.com/remodemha" target="_blank" rel="noopener" mr={1}>Kaggle</MuiLink>
             </Box>
           </Box>
