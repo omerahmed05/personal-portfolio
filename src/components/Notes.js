@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Notes.css';
-import { stripHtml } from 'string-strip-html'; 
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
@@ -61,7 +60,7 @@ const Notes = () => {
     if (isAuthenticated) {
       const note = {
         title: noteTitle,
-        text: stripHtml(editorContent),
+        text: editorContent,
       };
       try {
         const response = await fetch('/.netlify/functions/saveNote', {
@@ -116,7 +115,7 @@ const Notes = () => {
     if (isAuthenticated && selectedNote) {
       const updatedNote = {
         title: noteTitle,
-        text: stripHtml(editorContent),
+        text: editorContent,
       };
       try {
         const response = await fetch(`/.netlify/functions/updateNote?id=${selectedNote.id}`, {
@@ -175,13 +174,13 @@ const Notes = () => {
       {selectedNote && (
         <div className="note-details">
           <h2>{selectedNote.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: selectedNote.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }} />
+          <div dangerouslySetInnerHTML={{ __html: selectedNote.text }} />
           <div className="note-actions">
             {isAuthenticated && (
-              <div className="subpoints">
+              <>
                 <button className="edit-button" onClick={() => handleEditNote(notes.findIndex(n => n.id === selectedNote.id))}>Edit</button>
                 <button className="delete-button" onClick={() => handleDeleteNote(selectedNote.id)}>Delete</button>
-              </div>
+              </>
             )}
             <button className="close-button" onClick={handleCloseNote}>Close</button>
           </div>
