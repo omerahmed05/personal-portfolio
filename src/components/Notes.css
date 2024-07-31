@@ -189,3 +189,7 @@
 .auth-button:hover {
   background-color: #0056b3;
 }
+
+.subpoints {
+  padding-left: 20px;
+}
