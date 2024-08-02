@@ -157,7 +157,7 @@ const Notes = () => {
 
       <div className="notes-list">
         {notes.length === 0 ? (
-          <p style={{ textAlign: 'center', fontSize: '16px', color: '#666' }}>⏳ Loading Notes ⏳</p>
+          <p style={{ textAlign: 'center', fontSize: '32px', color: '#666' }}>⏳ Loading Notes ⏳</p>
         ) : (
           notes.map((note, index) => (
             <div
