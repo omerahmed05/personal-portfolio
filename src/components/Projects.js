@@ -44,20 +44,19 @@ const projects = [
           This is the website you're looking at right now! I built it to showcase my work and experience as a computer science student and software engineer intern. It's been a great way to learn modern web development while creating something practical.
         </Typography>
         <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
-          I used React for the frontend with Material-UI components to make it look professional and work well on all devices. 
+          I used React for the frontend with Material-UI components to make it look professional and work well on all devices. The design is clean and modern, with a responsive layout that works seamlessly across desktop, tablet, and mobile devices.
         </Typography>
         <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
-          One of the cool features I added is a Notes section where I can store and manage notes. I used Google Firebase Firestore for this - it's a flexible database that's perfect for this kind of thing. The notes are stored securely and I can easily add, edit, or delete them.
+          The website features a dynamic sidebar navigation with smooth transitions and hover effects. I implemented a mobile-friendly drawer menu that automatically adapts to smaller screens, ensuring a great user experience regardless of device size.
         </Typography>
         <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
-          For the backend operations, I went with Netlify Functions. These are serverless functions that handle things like saving and retrieving notes without me having to manage any servers.
+          For the contact form, I integrated Web3Forms API with hCaptcha protection to ensure only legitimate messages are sent while protecting against spam. The form is fully functional and provides real-time feedback to users.
         </Typography>
         <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
-          I also added some security features. For example, there's password protection for editing and deleting notes, so only I can make changes to important data.
-          The contact form uses Web3Forms API with hCaptcha protection to make sure only real people can send messages. And I set up GitHub Actions for continuous deployment, so whenever I update the code, the website automatically gets updated too.
+          I set up GitHub Actions for continuous deployment, so whenever I update the code, the website automatically gets deployed to Netlify. This creates a smooth development workflow and ensures the site is always up-to-date with the latest changes.
         </Typography>
         <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
-          This project really helped me understand how all the pieces of a modern web application fit together, from frontend to backend, databases, security, and deployment. It's been a great learning experience and something I'm proud to show off.
+          This project really helped me understand modern web development practices, from component-based architecture with React to responsive design principles and automated deployment workflows. It's been a great learning experience and something I'm proud to show off.
         </Typography>
       </>
     ),

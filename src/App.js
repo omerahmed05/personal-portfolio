@@ -7,14 +7,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AboutIcon from '@mui/icons-material/Person';
 import WorkIcon from '@mui/icons-material/Work';
 import CodeIcon from '@mui/icons-material/Code';
-import NoteIcon from '@mui/icons-material/Note';
 import ContactIcon from '@mui/icons-material/ContactMail';
 import portrait from './assets/portrait.jpg';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Experience from './components/Experience';
-import Notes from './components/Notes'; 
 import './styles.css';
 
 const App = () => {
@@ -38,8 +36,6 @@ const App = () => {
         return 'Projects';
       case 'contact':
         return 'Contact';
-      case 'notes':
-        return 'Notes';
       default:
         return 'About';
     }
@@ -53,8 +49,6 @@ const App = () => {
         return <Projects />;
       case 'contact':
         return <Contact />;
-      case 'notes':
-        return <Notes />;
       default:
         return <About />;
     }
@@ -64,7 +58,6 @@ const App = () => {
     { id: 'about', label: 'About', icon: <AboutIcon /> },
     { id: 'experience', label: 'Experience', icon: <WorkIcon /> },
     { id: 'projects', label: 'Projects', icon: <CodeIcon /> },
-    { id: 'notes', label: 'Notes', icon: <NoteIcon /> },
     { id: 'contact', label: 'Contact', icon: <ContactIcon /> },
   ];
 
