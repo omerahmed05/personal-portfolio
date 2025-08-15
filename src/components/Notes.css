@@ -189,3 +189,202 @@
 .auth-button:hover {
   background-color: #0056b3;
 }
+
+/* Enhanced list styling for note content display */
+.note-content ol {
+  counter-reset: list-counter;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.note-content ol > li {
+  counter-increment: list-counter;
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.note-content ol > li::before {
+  content: counter(list-counter) ". ";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.note-content ol ol {
+  counter-reset: sub-counter;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.note-content ol ol > li {
+  counter-increment: sub-counter;
+  padding-left: 2em;
+}
+
+.note-content ol ol > li::before {
+  content: counter(list-counter) "." counter(sub-counter) ". ";
+  left: 0.5em;
+}
+
+.note-content ol ol ol {
+  counter-reset: sub-sub-counter;
+}
+
+.note-content ol ol ol > li {
+  counter-increment: sub-sub-counter;
+  padding-left: 2.5em;
+}
+
+.note-content ol ol ol > li::before {
+  content: counter(list-counter) "." counter(sub-counter) "." counter(sub-sub-counter) ". ";
+  left: 1em;
+}
+
+.note-content ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+}
+
+.note-content ul ul {
+  list-style-type: circle;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.note-content ul ul ul {
+  list-style-type: square;
+}
+
+.note-content li {
+  margin-bottom: 0.5em;
+}
+
+.note-content p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+/* Quill editor specific styles */
+.ql-editor {
+  min-height: 200px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.ql-editor ol {
+  counter-reset: list-counter;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.ql-editor ol > li {
+  counter-increment: list-counter;
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.ql-editor ol > li::before {
+  content: counter(list-counter) ". ";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.ql-editor ol ol {
+  counter-reset: sub-counter;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.ql-editor ol ol > li {
+  counter-increment: sub-counter;
+  padding-left: 2em;
+}
+
+.ql-editor ol ol > li::before {
+  content: counter(list-counter) "." counter(sub-counter) ". ";
+  left: 0.5em;
+}
+
+.ql-editor ol ol ol {
+  counter-reset: sub-sub-counter;
+}
+
+.ql-editor ol ol ol > li {
+  counter-increment: sub-sub-counter;
+  padding-left: 2.5em;
+}
+
+.ql-editor ol ol ol > li::before {
+  content: counter(list-counter) "." counter(sub-counter) "." counter(sub-sub-counter) ". ";
+  left: 1em;
+}
+
+.ql-editor ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+}
+
+.ql-editor ul ul {
+  list-style-type: circle;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.ql-editor ul ul ul {
+  list-style-type: square;
+}
+
+.ql-editor li {
+  margin-bottom: 0.5em;
+}
+
+.ql-editor p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+/* Indent controls */
+.ql-editor [data-indent="1"] {
+  margin-left: 2em;
+}
+
+.ql-editor [data-indent="2"] {
+  margin-left: 4em;
+}
+
+.ql-editor [data-indent="3"] {
+  margin-left: 6em;
+}
+
+/* Quill toolbar styling */
+.ql-toolbar {
+  border: 1px solid #ccc;
+  border-radius: 4px 4px 0 0;
+  background-color: #f8f9fa;
+}
+
+.ql-container {
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+
+/* Ensure proper spacing in the editor */
+.ql-editor {
+  padding: 12px 15px;
+}
+
+/* Better list button styling */
+.ql-toolbar button[data-value="ordered"],
+.ql-toolbar button[data-value="bullet"] {
+  margin-right: 2px;
+}
+
+/* Indent button styling */
+.ql-toolbar button[data-value="-1"],
+.ql-toolbar button[data-value="+1"] {
+  margin-right: 2px;
+}

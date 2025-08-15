@@ -4,39 +4,60 @@ import './Projects.css';
 import codeWorldLogo from '../assets/codeWorldLogo.png';  
 import vtHaxLogo from '../assets/vtHaxLogo.png'; 
 import personalPortfolioLogo from "../assets/personalPortfolioLogo.png";
+import optionPricingLogo from "../assets/optionPricingLogo.jpg";
+
 const projects = [
+  {
+    title: 'Parallelized Option Pricing Simulator',
+    logo: optionPricingLogo,
+    logoLink: 'https://github.com/omerahmed05/Parallelized-Option-Pricing-Simulator',
+    description: (
+      <>
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          I built this C++ application to simulate financial option pricing using Monte Carlo methods. It's essentially a tool that helps predict how much financial options are worth by running thousands of simulations of possible market scenarios.
+        </Typography>
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          The core idea is pretty straightforward - instead of trying to calculate exact option values (which can be really complex), the program simulates thousands of different ways the market could move and then averages out the results. It uses the Black-Scholes model as the foundation, which is the standard way financial professionals think about option pricing.
+        </Typography>
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          What makes this project interesting is the performance optimization. Running thousands of simulations can take forever, so I used OpenMP to parallelize the computations. This means the program can use multiple CPU cores simultaneously, making it much faster for large-scale simulations.
+        </Typography>
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          The program handles both call and put options, and you can input things like current stock price, strike price, time until expiration, and volatility. I also added some Python integration for visualizing the results, which makes it easier to understand what's happening with the simulations.
+        </Typography>
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          I tested the accuracy by comparing my simulation results against the standard Black-Scholes formulas, and the parallelization gave significant speed improvements (up to 7x). The whole thing can be run in Docker containers, which makes it easy to deploy and use.
+        </Typography>
+      </>
+    ),
+    links: [
+      { label: 'GitHub', href: 'https://github.com/omerahmed05/Parallelized-Option-Pricing-Simulator' },
+    ]
+  },
   {
     title: 'Personal Portfolio Website',
     logo: personalPortfolioLogo,
     logoLink: 'https://www.omerahmed.net', 
     description: (
       <>
-        <Typography variant="body2" paragraph>
-          Designed and developed as a showcase of skills and experiences, my personal portfolio website serves as a comprehensive platform highlighting my journey as a computer science student and software engineer intern. 
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          This is the website you're looking at right now! I built it to showcase my work and experience as a computer science student and software engineer intern. It's been a great way to learn modern web development while creating something practical.
         </Typography>
-        <Typography variant="body2" paragraph>
-          The frontend of the portfolio is crafted using React. It employs Material-UI components for a polished and responsive design, ensuring optimal performance across devices and screen sizes. The use of React Router enables smooth navigation between different sections such as About, Projects, Experience, Contact, and Notes.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          I used React for the frontend with Material-UI components to make it look professional and work well on all devices. 
         </Typography>
-        <Typography variant="body2" paragraph>
-          Managing data for the Notes section is handled through Google Firebase Firestore, a flexible, scalable database for mobile, web, and server development from Firebase. This choice ensures secure storage and efficient retrieval of notes data, supporting CRUD (Create, Read, Update, Delete) operations seamlessly.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          One of the cool features I added is a Notes section where I can store and manage notes. I used Google Firebase Firestore for this - it's a flexible database that's perfect for this kind of thing. The notes are stored securely and I can easily add, edit, or delete them.
         </Typography>
-        <Typography variant="body2" paragraph>
-          Backend functionalities are powered by Netlify Functions, serverless functions that provide a straightforward way to build backend services for web applications without managing servers. These functions handle operations such as saving, fetching, updating, and deleting notes data securely.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          For the backend operations, I went with Netlify Functions. These are serverless functions that handle things like saving and retrieving notes without me having to manage any servers.
         </Typography>
-        <Typography variant="body2" paragraph>
-          Authentication for sensitive actions, like editing and deleting notes, is implemented using a password-based mechanism, ensuring that only authorized users can perform these operations.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          I also added some security features. For example, there's password protection for editing and deleting notes, so only I can make changes to important data.
+          The contact form uses Web3Forms API with hCaptcha protection to make sure only real people can send messages. And I set up GitHub Actions for continuous deployment, so whenever I update the code, the website automatically gets updated too.
         </Typography>
-        <Typography variant="body2" paragraph>
-          The Contact section integrates with Web3Forms API for handling form submissions securely. It includes validation using hCaptcha, a reliable bot protection service, ensuring that messages are submitted by human users only.
-        </Typography>
-        <Typography variant="body2" paragraph>
-          Continuous integration and deployment (CI/CD) pipelines are set up with GitHub Actions, automating the build, test, and deployment processes whenever changes are pushed to the repository. This ensures that updates to the portfolio are rolled out smoothly and efficiently.
-        </Typography>
-        <Typography variant="body2" paragraph>
-          Throughout the development process, best practices in software engineering, including version control with Git, code reviews, and testing, were followed to maintain code quality and ensure the reliability of the portfolio website.
-        </Typography>
-        <Typography variant="body2" paragraph>
-          Overall, this project not only showcases my technical skills in frontend and backend development but also demonstrates my ability to integrate various technologies into a cohesive and functional web application. 
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          This project really helped me understand how all the pieces of a modern web application fit together, from frontend to backend, databases, security, and deployment. It's been a great learning experience and something I'm proud to show off.
         </Typography>
       </>
     ),
@@ -50,22 +71,20 @@ const projects = [
     logoLink: 'https://code-world-no-blanket.github.io/',  
     description: (
       <>
-        <Typography variant="body2" paragraph>
-          AutoPrint was developed as part of my research internship at Code World, No Blanket Lab, where I assisted PhD student Minhyuk Ko and advisor Dr. Chris Brown with this project. Our goal was to enhance the efficiency of debugging in Java programming by automating the insertion and removal of print statements.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          This was my research project during an internship at Code World, No Blanket Lab. I worked with PhD student Minhyuk Ko and advisor Dr. Chris Brown to build a tool that makes debugging Java code much easier by automatically adding and removing print statements.
         </Typography>
-        <Typography variant="body2" paragraph>
-          We faced a significant challenge with the previous method of using regular expressions (Regex) to locate code segments for debugging, which was tedious and error-prone. To overcome this, I researched frameworks that could simplify this process, and that's how I stumbled upon <strong>JavaParser</strong>, a robust framework for parsing Java code. JavaParser not only streamlined the process of identifying and manipulating code segments but also improved collaboration among team members by providing a structured and reliable approach to debugging.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          The main problem we were solving was that the old method used regular expressions (Regex) to find code that needed debugging, which was both tedious and error-prone. I spent time researching better solutions and discovered JavaParser, which is a much more robust framework for working with Java code.
         </Typography>
-        <Typography variant="body2" paragraph>
-          During the implementation phase, I conducted extensive testing to validate JavaParser's capabilities, including:
-          <ul>
-            <li>Evaluating its accuracy in identifying potential bug locations</li>
-            <li>Assessing its performance in handling complex Java constructs</li>
-          </ul>
-          The transition from Regex to JavaParser marked a significant improvement in the tool's usability and effectiveness, making debugging tasks more efficient and collaborative-friendly.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          JavaParser was a game-changer. It works by parsing Java code into an Abstract Syntax Tree (AST) which is essentially a tree structure that represents the code's logical structure rather than just text. Instead of trying to match patterns in raw text with regex, we could now navigate through the AST to find specific code elements like method calls, variable declarations, or control flow statements. This made the whole debugging process much more efficient and reduced errors significantly.
         </Typography>
-        <Typography variant="body2" paragraph>
-          This project not only advanced my skills in Java development and software engineering methodologies but also highlighted the importance of adopting appropriate tools to enhance productivity and teamwork in software projects.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          I did a lot of testing to make sure JavaParser could handle complex Java code structures and accurately identify where bugs might be located. The switch from regex to JavaParser made the tool much more user-friendly and collaborative.
+        </Typography>
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          This project taught me a ton about Java development and software engineering best practices. More importantly, it showed me how choosing the right tools can dramatically improve both productivity and code quality.
         </Typography>
       </>
     ),
@@ -80,29 +99,20 @@ const projects = [
     logoLink: 'https://vthacks.com/',  
     description: (
       <>
-        <Typography variant="body2" paragraph>
-          For the Virginia Tech 2023 Hackathon, I undertook the development of a Discord bot designed to analyze candidates' resumes and provide comprehensive feedback. The project stemmed from a recognized lack of effective resume review resources, with many reviews merely guiding job-seekers to switch templates. My primary focus was on the backend, where I tackled the implementation of the resume parser.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          I built this Discord bot during the Virginia Tech 2023 Hackathon to help people get better feedback on their resumes. The idea came from noticing that most resume review tools just tell you to change your template, but don't actually analyze the content.
         </Typography>
-        <Typography variant="body2" paragraph>
-          One of the significant challenges was the tight deadline of just two days, amidst ongoing school assignments. Despite these constraints, I successfully engineered the bot to:
-          <ul>
-            <li>Accept PDF resumes</li>
-            <li>Convert them into text files</li>
-            <li>Parse them using a Python Natural Language Processing (NLP) API called <strong>Natural Language Processing Toolkit (NLTK)</strong></li>
-          </ul>
-          This process allowed the bot to extract and evaluate key skills.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          The biggest challenge was the time constraint because we only had two days to build everything, and I was juggling school assignments at the same time. I focused on the backend, specifically building the resume parser that could take PDF resumes and convert them into text that the bot could analyze.
         </Typography>
-        <Typography variant="body2" paragraph>
-          After parsing the text, the bot extracts skills mentioned in the resume and scores them based on three criteria:
-          <ul>
-            <li><strong>Technical Skills:</strong> Proficiency in programming languages, tools, and technologies</li>
-            <li><strong>Social Skills:</strong> Interpersonal skills, communication, and teamwork</li>
-            <li><strong>Academic Capabilities:</strong> GPA and skills that demonstrate academic prowess, such as time-management and research abilities</li>
-          </ul>
-          In addition, the extracted text was cross-referenced with a JSON file that contains an extensive list of skills for each criteria. For example, text that would increase the score of the Academic Capabilities category would be words like time-management and research.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          I used Python's Natural Language Processing Toolkit (NLTK) to parse the text and extract skills from the resumes. The bot then scores each resume based on three categories: technical skills (like programming languages and tools), social skills (communication, teamwork), and academic capabilities (GPA, research abilities, time management).
         </Typography>
-        <Typography variant="body2" paragraph>
-          This project not only demonstrated my technical skills in backend development and ability to use ML APIs but also showcased my ability to pick up new skills quickly and manage time effectively under pressure. It was a valuable learning experience in rapid prototyping and iterative development, resulting in a functional tool that addressed a genuine need in the job application process.
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          The scoring system works by cross-referencing the extracted text against a comprehensive JSON file containing lists of skills for each category. For example, words like "time-management" and "research" would boost the academic capabilities score.
+        </Typography>
+        <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.7, mb: 2 }}>
+          This project was a great test of my ability to learn new technologies quickly and work under pressure. It taught me a lot about rapid prototyping and how to build something useful in a very short timeframe. The bot actually works and provides real value to people trying to improve their resumes.
         </Typography>
       </>
     ),
@@ -114,22 +124,42 @@ const projects = [
 
 const Projects = () => {
   return (
-    <Container className="projects-container">
+    <Container className="projects-container" sx={{ py: 4 }}>
+      <Typography variant="h3" sx={{ mb: 4, fontWeight: 'bold', textAlign: 'center' }}>
+        My Projects
+      </Typography>
       {projects.map((project, index) => (
-        <Card key={index} className="project-card">
-          <CardContent>
-            <Box display="flex" alignItems="center" justifyContent="space-between">
-              <Typography variant="h5" component="div">{project.title}</Typography>
+        <Card key={index} className="project-card" sx={{ mb: 4, borderRadius: 3 }}>
+          <CardContent sx={{ p: 4 }}>
+            <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
+              <Typography variant="h4" component="div" sx={{ fontWeight: 600 }}>
+                {project.title}
+              </Typography>
               <MuiLink href={project.logoLink} target="_blank" rel="noopener">
-                <img src={project.logo} alt={`${project.title} logo`} style={{ width: '50px', height: 'auto' }} />
+                <img src={project.logo} alt={`${project.title} logo`} style={{ width: '60px', height: 'auto' }} />
               </MuiLink>
             </Box>
-            <Box className="project-description">{project.description}</Box>
-            {project.links && project.links.map((link, idx) => (
-              <MuiLink key={idx} href={link.href} target="_blank" rel="noopener" style={{ marginRight: '1rem' }}>
-                {link.label}
-              </MuiLink>
-            ))}
+            <Box className="project-description" sx={{ mb: 3 }}>{project.description}</Box>
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              {project.links && project.links.map((link, idx) => (
+                <MuiLink 
+                  key={idx} 
+                  href={link.href} 
+                  target="_blank" 
+                  rel="noopener" 
+                  sx={{ 
+                    fontSize: '1.1rem',
+                    fontWeight: 500,
+                    textDecoration: 'none',
+                    '&:hover': {
+                      textDecoration: 'underline'
+                    }
+                  }}
+                >
+                  {link.label}
+                </MuiLink>
+              ))}
+            </Box>
           </CardContent>
         </Card>
       ))}

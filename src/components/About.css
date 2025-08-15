@@ -57,6 +57,29 @@
     gap: 0.5rem;
 }
 
+.name-and-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.social-links .MuiIconButton-root {
+    color: #1976d2;
+    transition: color 0.3s ease;
+}
+
+.social-links .MuiIconButton-root:hover {
+    color: #1565c0;
+    background-color: rgba(25, 118, 210, 0.04);
+}
+
 @media (max-width: 600px) {
     .about-content {
         flex-direction: column;
@@ -70,6 +93,12 @@
         margin-left: 0;
     }
 
+    .name-and-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
     .text-content h1 {
         font-size: 1.25rem;
     }
@@ -80,7 +109,7 @@
         margin-bottom: -15px
     }
 
-    .nav-links {
+    .social-links {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;

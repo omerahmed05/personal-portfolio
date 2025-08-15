@@ -1,37 +1,25 @@
 import React from 'react';
-import portrait from '../assets/portrait.jpg';
-import { Box, Typography, Link as MuiLink, Container, Paper } from '@mui/material';
+import { Box, Typography, Container, Paper } from '@mui/material';
 import './About.css';
 
 const About = () => {
   return (
-    <Container className="about-container">
-      <Paper elevation={3} className="about-box">
-        <Box className="about-content">
-          <img src={portrait} alt="Omer Ahmed" className="profile-photo" />
-          <Box className="text-content">
-            <Typography variant="h4">Omer Ahmed</Typography>
-            <Typography variant="subtitle1">Computer Science Student @ Virginia Tech | Software Engineer Intern @ Xylem Inc.</Typography>
-            <Typography variant="body2" className="location">📍 Chantilly, VA</Typography>
-            <Box className="nav-links">
-              <MuiLink href="https://x.com/OmerAhmedib" target="_blank" rel="noopener" mr={1}>X</MuiLink>
-              <MuiLink href="https://linkedin.com/in/omah" target="_blank" rel="noopener" mr={1}>LinkedIn</MuiLink>
-              <MuiLink href="https://github.com/omerahmed05" target="_blank" rel="noopener" mr={1}>GitHub</MuiLink>
-              <MuiLink href="https://drive.google.com/file/d/1NGfs0TfTetGm5gefOk5lB5Vrcor6SFRl/view?usp=sharing" target="_blank" rel="noopener" mr={1}>Resume</MuiLink>
-              <MuiLink href="https://www.kaggle.com/remodemha" target="_blank" rel="noopener" mr={1}>Kaggle</MuiLink>
-            </Box>
-          </Box>
-        </Box>
-      </Paper>
-      <Paper elevation={3} className="description-box">
-        <Box className="description">
-          <Typography variant="body1" paragraph>
-            I'm currently a full-time undergraduate student at Virginia Tech, pursuing a degree in Computer Science. Alongside my studies, I'm gaining valuable experience as a Software Engineer Intern at Xylem Inc. My passion lies in the broader field of artificial intelligence, particularly in exploring how advanced algorithms can be inspired by and integrated with insights from neuroscience. This drive fuels both my academic pursuits and personal projects, where I leverage technology to tackle complex challenges.
-          </Typography>
-          <Typography variant="body1" paragraph>
-            In my free time, I like to indulge in activities that stimulate my mind and body, such as playing chess, soccer, and engaging in continuous learning and research. For the upcoming year, I'm eager to embark on an independent study focusing on the research question: "How can reinforcement learning algorithms be adapted to incorporate strategies used by the human brain for decision-making and learning from experience?" I'm always looking for opportunities, so feel free to reach out!
-          </Typography>
-        </Box>
+    <Container sx={{ py: 4 }}>
+      <Typography variant="h3" sx={{ 
+        textAlign: 'center', 
+        fontWeight: 'bold', 
+        mb: 4
+      }}>
+        About Me
+      </Typography>
+      
+      <Paper elevation={3} sx={{ p: 5, borderRadius: 3 }}>
+        <Typography variant="h6" paragraph sx={{ fontSize: '1.2rem', lineHeight: 1.8, mb: 3 }}>
+          I'm a senior at Virginia Tech pursuing a degree in Computer Science. I'm currently expanding my skills in C++ and high-performance computing (HPC), while also bringing hands-on experience with full-stack development, including Spring Boot and Angular, gained through previous internship projects. I'm passionate about building efficient, scalable solutions and exploring innovative technologies.
+        </Typography>
+        <Typography variant="h6" paragraph sx={{ fontSize: '1.2rem', lineHeight: 1.8 }}>
+          My guiding philosophy is to give my absolute best in every endeavor. This mindset informs everything I do, from academics and entrepreneurial pursuits to athletics and personal projects. I believe that by constantly challenging myself and pushing my limits, I not only grow into the best version of myself but also inspire others and shape the world around me.
+        </Typography>
       </Paper>
     </Container>
   );

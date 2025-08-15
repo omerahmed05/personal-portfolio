@@ -11,9 +11,20 @@ const db = admin.firestore();
 
 exports.handler = async (event) => {
   try {
-    const noteId = event.queryStringParameters.id;
     const updatedNote = JSON.parse(event.body);
-    await db.collection('notes').doc(noteId).set(updatedNote, { merge: true });
+    const noteId = updatedNote.id;
+    
+    if (!noteId) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Note ID is required' }),
+      };
+    }
+    
+    // Remove the id from the data to be stored (Firestore doesn't store it in the document)
+    const { id, ...noteData } = updatedNote;
+    
+    await db.collection('notes').doc(noteId).set(noteData, { merge: true });
     return {
       statusCode: 200,
       body: JSON.stringify({ success: true }),
